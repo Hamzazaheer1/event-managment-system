@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
+import { BsToggleOn } from "react-icons/bs";
 import axios from "axios";
 
 const OrganizeEvent = () => {
@@ -35,6 +36,8 @@ const OrganizeEvent = () => {
   const [selectedEvent, setSelectedEvent] = useState("");
   const [getDept, setGetDept] = useState("");
   const [getPatId, setGetPatId] = useState("");
+  const [paid, setPaid] = useState(false);
+  const [bank, setBank] = useState({ bankname: "", accnumber: "", amount: 0 });
 
   const [studentInput, setStudentInput] = useState([
     { stdname: "", stdregno: "", stdrole: "" },
@@ -93,15 +96,11 @@ const OrganizeEvent = () => {
           },
         }
       );
-      // setResponse(resp);
-      // setError(null);
+
       console.log(resp);
       alert("sucess");
       setIsLoading(false);
     } catch (err) {
-      // setError(err);
-      // setResponse(null);
-      console.log(err);
       console.log(err.response.data.message);
       setIsLoading(false);
       alert(err.response.data.message);
@@ -209,6 +208,20 @@ const OrganizeEvent = () => {
           <h1 className="text-4xl font-semibold text-gray-900">
             Organize Event!
           </h1>
+          <div className="flex items-center gap-2 text-2xl font-semibold">
+            <span>Free</span>
+            <span>
+              <BsToggleOn
+                className={`${
+                  paid ? "-rotate-0 text-red-600" : "rotate-180"
+                } text-[2rem] mt-[0.5rem]`}
+                onClick={() => {
+                  setPaid(!paid);
+                }}
+              />
+            </span>
+            <span className="text-red-500">Paid</span>
+          </div>
           <form className="mt-12" onSubmit={organizeEventHandler}>
             <h1 className="flex justify-center bg-red-500 rounded h-8 text-2xl font-semibold">
               Basic Information
@@ -332,7 +345,7 @@ const OrganizeEvent = () => {
                             tabindex="-1"
                             id="menu-item-0"
                             onClick={() => {
-                              handleSocietySelection(item._id, item.id);
+                              handleSocietySelection(item._id, item.patron._id);
                             }}
                           >
                             {item.society}
@@ -490,6 +503,104 @@ const OrganizeEvent = () => {
             {/* Requirements */}
             <h1 className="flex justify-center bg-red-500 rounded h-8 text-2xl font-semibold">
               Requirements (Please Tick the box)
+            </h1>
+            <div className="lg:grid lg:grid-cols-2 gap-x-8 mt-8">
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value={true}
+                  className="w-4 h-4 text-black bg-gray-100 rounded border-gray-300 focus:ring-red-500 "
+                  onChange={(e) => setSashes(e.target.value)}
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900 "
+                >
+                  SASHES - If required, contact Student Affairs Office.
+                </label>
+              </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value={true}
+                  className="w-4 h-4 text-black bg-gray-100 rounded border-gray-300 focus:ring-red-500 "
+                  onChange={(e) => setPanaflex(e.target.value)}
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900 "
+                >
+                  PANAFLEX - If required, contact Student Affairs Office.
+                </label>
+              </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value={true}
+                  className="w-4 h-4 text-black bg-gray-100 rounded border-gray-300 focus:ring-red-500 "
+                  onChange={(e) => setMediaCoverage(e.target.value)}
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900 "
+                >
+                  MEDIA COVERAGE - If required, contact Student Affairs Office.
+                </label>
+              </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value={true}
+                  className="w-4 h-4 text-black bg-gray-100 rounded border-gray-300 focus:ring-red-500 "
+                  onChange={(e) => setRefreshment(e.target.value)}
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900 "
+                >
+                  REFRESHMENTS - If required, Submit the copy of the form to the
+                  concerend Academic Officer a day before the event.
+                </label>
+              </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value={true}
+                  className="w-4 h-4 text-black bg-gray-100 rounded border-gray-300 focus:ring-red-500 "
+                  onChange={(e) => setTransport(e.target.value)}
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900 "
+                >
+                  TRANSPORT - If required, contact Student Affairs Office.
+                </label>
+              </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value={true}
+                  className="w-4 h-4 text-black bg-gray-100 rounded border-gray-300 focus:ring-red-500 "
+                  onChange={(e) => setShield(e.target.value)}
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900 "
+                >
+                  SHIELD - to be decided as per policy by the signing authority.
+                </label>
+              </div>
+            </div>
+
+            {/* Requirements */}
+            <h1 className="flex justify-center bg-red-500 rounded h-8 text-2xl font-semibold">
+              Billing Information
             </h1>
             <div className="lg:grid lg:grid-cols-2 gap-x-8 mt-8">
               <div className="flex items-center mb-4">

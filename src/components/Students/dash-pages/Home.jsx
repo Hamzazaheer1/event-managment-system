@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
 import { AiFillNotification } from "react-icons/ai";
 import { tabData } from "./Data/HomeData";
+import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 import EventImage from "../../images/event.jpg";
