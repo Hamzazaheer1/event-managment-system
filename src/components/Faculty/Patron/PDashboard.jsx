@@ -6,13 +6,15 @@ import FHome from "./pages/FHome";
 import GeneralInfo from "./pages/GeneralInfo";
 import ManageEvents from "./pages/ManageEvents";
 import ViewGallery from "../../Shared/ViewGallery";
+import ManageBilling from "./pages/ManageBilling";
 
 const data = [
   { id: 1, name: "Home" },
   { id: 2, name: "Manage Events" },
-  { id: 3, name: "Gallery" },
-  { id: 4, name: "General Info" },
-  { id: 5, name: "Events List" },
+  { id: 3, name: "Manage Billing" },
+  { id: 4, name: "Gallery" },
+  { id: 5, name: "General Info" },
+  { id: 6, name: "Events List" },
 ];
 
 const PDashboard = () => {
@@ -98,9 +100,10 @@ const PDashboard = () => {
         <div className=" mt-10 ml-4">
           {pageSelector === 1 && <FHome />}
           {pageSelector === 2 && <ManageEvents />}
-          {pageSelector === 3 && <ViewGallery />}
-          {pageSelector === 4 && <GeneralInfo />}
-          {pageSelector === 5 && <EventsList />}
+          {pageSelector === 3 && <ManageBilling />}
+          {pageSelector === 4 && <ViewGallery />}
+          {pageSelector === 5 && <GeneralInfo />}
+          {pageSelector === 6 && <EventsList />}
         </div>
       </div>
     </div>
