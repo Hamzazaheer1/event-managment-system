@@ -74,6 +74,9 @@ const YourEvents = () => {
                   Created At
                 </th>
                 <th scope="col" className="py-3 px-6">
+                  Entry Type
+                </th>
+                <th scope="col" className="py-3 px-6">
                   Patron Approval
                 </th>
                 <th scope="col" className="py-3 px-6">
@@ -102,6 +105,13 @@ const YourEvents = () => {
                       {item.title}
                     </th>
                     <td className="py-4 px-6">{item.createdAt}</td>
+                    <td className="py-4 px-6">
+                      {item.isPaid === true ? (
+                        <span className="font-semibold text-red-500">Paid</span>
+                      ) : (
+                        <span>Free</span>
+                      )}
+                    </td>
                     <td className="py-4 px-6">
                       {item.isPatronApproved === true ? (
                         <FcApproval className=" w-10 h-8 " />
