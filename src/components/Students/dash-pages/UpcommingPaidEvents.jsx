@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineCalendar, AiFillClockCircle } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-const UpcomingEvents = () => {
+const UpcomingPaidEvents = () => {
   let jwt;
   if (localStorage.Student) {
     jwt = localStorage.getItem("Student");
@@ -24,13 +24,11 @@ const UpcomingEvents = () => {
             },
           }
         );
-
         setResponse(resp.data);
         setError(null);
       } catch (err) {
         setError(err);
         setResponse(null);
-        // alert(error);
       }
     };
     apiHandler();
@@ -45,8 +43,8 @@ const UpcomingEvents = () => {
     <div>
       <h1 className="text-2xl font-bold">Upcoming Events in CUST</h1>
       <div className="grid grid-cols-4">
-        {response?.FreeEvents.length >= 1 &&
-          response?.FreeEvents.map((item, index) => (
+        {response?.PaidEvents.length >= 1 &&
+          response?.PaidEvents.map((item, index) => (
             <div
               class="w-[20rem] p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10"
               key={index + 1}
@@ -71,11 +69,37 @@ const UpcomingEvents = () => {
                   {item.proposedvenue}
                 </p>
               </div>
+              <hr class="border-black mt-4" />
+              <p className="w-max mx-auto mt-2 font-bold text-black cursor-pointer hover:underline ">
+                Register Now
+              </p>
             </div>
           ))}
       </div>
+      {/* <div class="max-w-sm p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10">
+        <p class="mb-3 font-bold text-white">Department of CS</p>
+        <p class="mb-3 font-bold text-black">Event: Gaming Competition</p>
+        <div className="text-black text-sm font-semibold">
+          <p class="mb-1  flex items-center gap-1">
+            <AiOutlineCalendar />
+            Mon, 10-20-2022
+          </p>
+          <p class="mb-1  flex items-center gap-1">
+            <AiFillClockCircle />
+            Mon, 10-20-2022
+          </p>
+          <p class="mb-1  flex items-center gap-1">
+            <FaMapMarkerAlt />
+            Mon, 10-20-2022
+          </p>
+        </div>
+        <hr class="border-black mt-4" />
+        <p className="w-max mx-auto mt-2 font-bold text-black cursor-pointer hover:underline ">
+          Register Now
+        </p>
+      </div> */}
     </div>
   );
 };
 
-export default UpcomingEvents;
+export default UpcomingPaidEvents;

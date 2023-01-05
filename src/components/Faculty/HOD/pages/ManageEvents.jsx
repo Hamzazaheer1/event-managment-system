@@ -278,13 +278,7 @@ const ManageEvents = () => {
                       <p className="leading-relaxed text-white text-xl  ">
                         Society:{" "}
                         <span className="pl-3 text-gray-400">
-                          {singleEvent.Societyname}
-                        </span>
-                      </p>
-                      <p className="leading-relaxed text-white text-xl  ">
-                        Event type:{" "}
-                        <span className="pl-3 text-gray-400">
-                          {singleEvent.Eventtype}
+                          {singleEvent.society?.society}
                         </span>
                       </p>
                     </div>

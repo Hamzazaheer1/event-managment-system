@@ -8,6 +8,7 @@ import custLogo from "../images/CUST-Logo.png";
 import GeneralInfo from "./dash-pages/GeneralInfo";
 import { useNavigate } from "react-router-dom";
 import ViewGallery from "../Shared/ViewGallery";
+import UpcomingPaidEvents from "./dash-pages/UpcommingPaidEvents";
 
 const SDashboard = () => {
   const [pageSelector, setPageSelector] = useState(1);
@@ -39,9 +40,10 @@ const SDashboard = () => {
       name: "your events",
     },
     { id: 4, name: "society" },
-    { id: 5, name: "upcoming events" },
-    { id: 6, name: "gallery" },
-    { id: 7, name: "general info" },
+    { id: 5, name: "upcoming paid events" },
+    { id: 6, name: "upcoming events" },
+    { id: 7, name: "gallery" },
+    { id: 8, name: "profile" },
   ];
 
   return (
@@ -112,9 +114,10 @@ const SDashboard = () => {
           {pageSelector === 2 && <OrganizeEvent />}
           {pageSelector === 3 && <YourEvents />}
           {pageSelector === 4 && <Society />}
-          {pageSelector === 5 && <UpcomingEvents />}
-          {pageSelector === 6 && <ViewGallery />}
-          {pageSelector === 7 && <GeneralInfo />}
+          {pageSelector === 5 && <UpcomingPaidEvents />}
+          {pageSelector === 6 && <UpcomingEvents />}
+          {pageSelector === 7 && <ViewGallery />}
+          {pageSelector === 8 && <GeneralInfo />}
         </div>
       </div>
     </div>
