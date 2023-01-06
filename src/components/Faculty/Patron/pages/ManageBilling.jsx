@@ -12,13 +12,14 @@ const ManageBilling = () => {
   const bearer = "Bearer " + jwt;
   const [response, setResponse] = useState();
   const [photo, setPhoto] = useState("");
-  const [openAddManger, setOpenAddManager] = useState(false);
+  const [regNo, setRegno] = useState("");
+  const [eventID, setEventId] = useState("");
 
   useEffect(() => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:3001/api/v1/register/myregisters",
+          "http://localhost:3001/api/v1/register/pendingbyPatron",
           {
             headers: {
               authorization: bearer,
@@ -33,9 +34,47 @@ const ManageBilling = () => {
     apiHandler();
   }, [bearer]);
 
-  const handleClick = (photo) => {
+  const handleClick = (photo, reg) => {
     setPhoto(photo);
-    setOpenAddManager(true);
+    setRegno(reg);
+  };
+
+  const handleRegisterApprove = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/v1/register/approve/${eventID}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      alert("Register request approved");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRegisterReject = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/v1/register/reject/${eventID}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      alert("Register request rejected");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -55,6 +94,12 @@ const ManageBilling = () => {
                 <th scope="col" className="py-3 px-6">
                   Proof
                 </th>
+                <th scope="col" className="py-3 px-6">
+                  Approval
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -62,32 +107,43 @@ const ManageBilling = () => {
                 ? response.map((item, index) => (
                     <tr
                       key={index + 1}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer"
+                      onClick={() => {
+                        handleClick(item.proof, item.student.regno);
+                        setEventId(item._id);
+                      }}
                     >
                       <th
                         scope="row"
                         className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        {item.title}
+                        {item.event.title}
                       </th>
-                      <td className="py-4 px-6">{item.event.title}</td>
                       <td className="py-4 px-6">{item.student.regno}</td>
                       <td className="py-4 px-6">
                         <img src={item.proof} className=" w-12 h-12" />
                       </td>
                       <td className="py-4 px-6">
-                        {convertDate(item.createdAt)}
+                        {item.isApproved === true ? (
+                          <FcApproval className="w-10 h-8 " />
+                        ) : (
+                          <FcCancel className="w-10 h-8" />
+                        )}
                       </td>
-                      <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
+                      <td>
                         <button
                           type="button"
                           className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                          onClick={() => {
-                            setEventId(item.id);
-                            setEventSelector(!eventSelector);
-                          }}
+                          onClick={handleRegisterApprove}
                         >
-                          Action
+                          Approve
+                        </button>
+                        <button
+                          type="button"
+                          className="ml-1 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                          onClick={handleRegisterReject}
+                        >
+                          Reject
                         </button>
                       </td>
                     </tr>
@@ -96,27 +152,16 @@ const ManageBilling = () => {
             </tbody>
           </table>
         </div>
-        <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 col-span-1">
-          <div class="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-              <img
-                class="p-8 rounded-t-lg"
-                src="/docs/images/products/apple-watch.png"
-                alt="product image"
-              />
-            </a>
-            <div class="px-5 pb-5">
-              <div class="flex items-center justify-between">
-                <span class="text-3xl font-bold text-gray-900 dark:text-white">
-                  BSP191085
-                </span>
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Approve
-                </button>
+        {photo && (
+          <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 col-span-1">
+            <div class="w-full max-w-sm rounded-lg shadow-md bg-gray-800 border-gray-700">
+              <img class="p-8 rounded-t-lg" src={photo} alt="product image" />
+              <div class="px-5 pb-5 flex items-center justify-between">
+                <span class="text-3xl font-bold text-white">{regNo}</span>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
