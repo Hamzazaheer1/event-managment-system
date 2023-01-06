@@ -118,7 +118,7 @@ const AdminLogin = () => {
                 ref={userRef}
                 autoComplete="off"
                 value={user}
-                className="bg-gray-50/25 border border-gray-300 text-gray-900 text-sm font-bold rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
                 placeholder="Admin Id"
                 required
                 onChange={(e) => setUser(e.target.value)}
@@ -157,7 +157,7 @@ const AdminLogin = () => {
               <input
                 type="password"
                 id="password"
-                className="bg-gray-50/25 border border-gray-300 text-gray-900 text-sm font-bold rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
                 required
                 placeholder="*****"
                 onChange={(e) => setPwd(e.target.value)}

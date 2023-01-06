@@ -8,22 +8,18 @@ import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 
 const Home = () => {
-  const [openTab, setOpenTab] = useState(1);
-  const [response, setResponse] = useState();
-  const [notificationResponse, setNotificationResponse] = useState();
-  const [notificationError, setNotificationError] = useState();
-  const [error, setError] = useState();
-  const [count, setCount] = useState(0);
-
   let jwt;
   if (localStorage.Student) {
     jwt = localStorage.getItem("Student");
   }
 
   const bearer = "Bearer " + jwt;
+  const [openTab, setOpenTab] = useState(1);
+  const [response, setResponse] = useState();
+  const [notificationResponse, setNotificationResponse] = useState();
+  const [count, setCount] = useState(0);
 
   const apiHandler = async (x) => {
-    console.log("actual date", x);
     try {
       const resp = await axios.get(
         `http://localhost:3001/api/v1/events/eventbydate/${x}`,
@@ -33,14 +29,10 @@ const Home = () => {
           },
         }
       );
-      console.log(resp.data);
       setResponse(resp.data);
-      setCount(4 - resp.data.resultfree + resp.data.resultpaid);
-      setError(null);
+      setCount(4 - (resp.data.resultfree + resp.data.resultpaid));
     } catch (err) {
-      setError(err);
-      setResponse(null);
-      // console.log(error);
+      console.log(err);
     }
   };
 
@@ -56,15 +48,13 @@ const Home = () => {
           }
         );
         setNotificationResponse(resp.data);
-        setNotificationError(null);
       } catch (err) {
-        setNotificationError(err);
-        setNotificationResponse(null);
+        console.log(err);
       }
     };
 
     apiHandler();
-  }, [notificationError]);
+  }, [bearer]);
 
   function convertDate(dateString) {
     const date = new Date(dateString);
@@ -98,8 +88,11 @@ const Home = () => {
           <div className="mt-62 xl:border rounded-lg">
             <div className={openTab === 1 ? "block" : "hidden"}>
               <h1 className="mb-4 mt-8 text-2xl font-bold ">Notifications</h1>
-              {notificationResponse?.FreeEvents.map((item) => (
-                <div className="2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-300 ">
+              {notificationResponse?.FreeEvents.map((item, index) => (
+                <div
+                  key={index + 1}
+                  className="2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-300 "
+                >
                   <div className="flex items-center">
                     <AiFillNotification className="w-5 h-5 mr-5 text-red-500 ml-1" />
                     {notificationResponse?.resultfree >= 1 ? (
@@ -136,8 +129,11 @@ const Home = () => {
               ) : (
                 ""
               )}
-              {notificationResponse?.PaidEvents.map((item) => (
-                <div className="2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-300 ">
+              {notificationResponse?.PaidEvents.map((item, index) => (
+                <div
+                  key={index}
+                  className="2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-300 "
+                >
                   <div className="flex items-center">
                     <AiFillNotification className="w-5 h-5 mr-5 text-red-500 ml-1" />
                     {notificationResponse?.resultpaid >= 1 ? (
@@ -178,25 +174,25 @@ const Home = () => {
                 {response?.FreeEvents.length >= 1 &&
                   response?.FreeEvents.map((item, index) => (
                     <div
-                      class="max-w-sm p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10"
+                      className="max-w-sm p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10"
                       key={index + 1}
                     >
-                      <p class="mb-3 font-bold text-white">
+                      <p className="mb-3 font-bold text-white">
                         Department of <span>{item.department}</span>
                       </p>
-                      <p class="mb-3 font-bold text-black">
+                      <p className="mb-3 font-bold text-black">
                         Event: <span>{item.title}</span>
                       </p>
                       <div className="text-black text-sm font-semibold">
-                        <p class="mb-1  flex items-center gap-1">
+                        <p className="mb-1  flex items-center gap-1">
                           <AiOutlineCalendar />
                           {convertDate(item.startdate)}
                         </p>
-                        <p class="mb-1  flex items-center gap-1">
+                        <p className="mb-1  flex items-center gap-1">
                           <AiFillClockCircle />
                           {item.duration}
                         </p>
-                        <p class="mb-1  flex items-center gap-1">
+                        <p className="mb-1  flex items-center gap-1">
                           <FaMapMarkerAlt />
                           {item.proposedvenue}
                         </p>
@@ -206,25 +202,25 @@ const Home = () => {
                 {response?.PaidEvents.length >= 1 &&
                   response?.PaidEvents.map((item, index) => (
                     <div
-                      class="max-w-sm p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10"
+                      className="max-w-sm p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10"
                       key={index + 1}
                     >
-                      <p class="mb-3 font-bold text-white">
+                      <p className="mb-3 font-bold text-white">
                         Department of <span>{item.department}</span>
                       </p>
-                      <p class="mb-3 font-bold text-black">
+                      <p className="mb-3 font-bold text-black">
                         Event: <span>{item.title}</span>
                       </p>
                       <div className="text-black text-sm font-semibold">
-                        <p class="mb-1  flex items-center gap-1">
+                        <p className="mb-1  flex items-center gap-1">
                           <AiOutlineCalendar />
                           {convertDate(item.startdate)}
                         </p>
-                        <p class="mb-1  flex items-center gap-1">
+                        <p className="mb-1  flex items-center gap-1">
                           <AiFillClockCircle />
                           {item.duration}
                         </p>
-                        <p class="mb-1  flex items-center gap-1">
+                        <p className="mb-1  flex items-center gap-1">
                           <FaMapMarkerAlt />
                           {item.proposedvenue}
                         </p>

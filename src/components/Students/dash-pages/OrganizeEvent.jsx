@@ -97,7 +97,6 @@ const OrganizeEvent = () => {
         }
       );
 
-      // console.log(resp);
       alert("sucess");
       setIsLoading(false);
     } catch (err) {
@@ -143,7 +142,6 @@ const OrganizeEvent = () => {
         }
       );
 
-      console.log(resp);
       alert("sucess");
       setIsLoading(false);
     } catch (err) {
@@ -160,12 +158,8 @@ const OrganizeEvent = () => {
           `http://localhost:3001/api/v1/societyandtypes/societbydepartment/${getDept}`
         );
         setResponse(resp.data.data);
-        setError(null);
-        console.log(resp.data.data);
       } catch (err) {
-        setError(err);
-        setResponse(null);
-        console.log(error);
+        console.log(err);
       }
     };
     apiHandler();
@@ -176,20 +170,14 @@ const OrganizeEvent = () => {
       try {
         const resp = await axios.get(
           "http://localhost:3001/api/v1/societyandtypes/alleventtypes"
-          // {
-          //   headers: {
-          //     authorization: bearer,
-          //   },
-          // }
         );
         setEventResponse(resp.data.data);
-        // console.log("events are ", eventResponse);
       } catch (err) {
         console.log(err);
       }
     };
     eventApiHandler();
-  }, [error, eventResponse]);
+  }, [eventResponse]);
 
   const handleEventClick = () => {
     setEventToggle(!eventToggle);
@@ -201,17 +189,14 @@ const OrganizeEvent = () => {
     setGetPatId(patId);
   };
 
-  const handleSelectEventClick = () => {
-    setEventSelectToggle(!eventSelectToggle);
-  };
+  // const handleSelectEventClick = () => {
+  //   setEventSelectToggle(!eventSelectToggle);
+  // };
 
-  const handleEventSelection = (xEvent) => {
-    handleSelectEventClick();
-    setSelectedEvent(xEvent);
-  };
-
-  // console.log("selected society = ", selectedSociety);
-  // console.log("selected event = ", selectedEvent);
+  // const handleEventSelection = (xEvent) => {
+  //   handleSelectEventClick();
+  //   setSelectedEvent(xEvent);
+  // };
 
   useEffect(() => {
     const apiHandler = async () => {

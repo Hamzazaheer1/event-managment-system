@@ -13,14 +13,11 @@ In the same directory [npm start]() in the cmd.
 
 Admin
 hamza.admin
-haxer420
 
 Faculty
-
-HOD
-
-Dean
+hamza.patron
+hamza.hod
+hamza.dean
 
 Student
 BSP191085
-haxer420
