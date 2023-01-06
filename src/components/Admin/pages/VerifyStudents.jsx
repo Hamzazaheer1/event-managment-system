@@ -71,8 +71,8 @@ const VerifyStudents = () => {
           List of Unverified Students
         </h1>
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 h-screen">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase bg-red-200 ">
               <tr>
                 <th scope="col" className="py-3 px-6">
                   Photo
@@ -98,14 +98,14 @@ const VerifyStudents = () => {
               response.map((item, index) => (
                 <tbody key={index + 1}>
                   <tr
-                    className="border-b bg-gray-800 border-gray-700  hover:bg-gray-600 cursor-pointer"
+                    className="border-b bg-gray-200 border-gray-200  hover:bg-gray-50 cursor-pointer"
                     onClick={() => {
                       handleClick(item.photo, item.name);
                     }}
                   >
                     <th
                       scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                     >
                       <img
                         src={item.photo}
@@ -115,7 +115,7 @@ const VerifyStudents = () => {
                     </th>
                     <th
                       scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                     >
                       {item.regno}
                     </th>
@@ -130,7 +130,7 @@ const VerifyStudents = () => {
                     >
                       <button
                         type="button"
-                        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                       >
                         Verify
                       </button>

@@ -13,9 +13,11 @@ const RegisterRequests = () => {
   const [response, setResponse] = useState();
   const [photo, setPhoto] = useState("");
   const [openAddManger, setOpenAddManager] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const apiHandler = async () => {
+      setIsLoading(true);
       try {
         const resp = await axios.get(
           "http://localhost:3001/api/v1/register/myregisters",
@@ -26,8 +28,10 @@ const RegisterRequests = () => {
           }
         );
         setResponse(resp.data.data);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
+        setIsLoading(false);
       }
     };
     apiHandler();
@@ -44,10 +48,10 @@ const RegisterRequests = () => {
         Your Register In Event Requests
       </h1>
 
-      {/* {isLoading ? (
+      {isLoading ? (
         <div role="status" className="flex justify-center pb-10">
           <svg
-            className="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
+            className="inline mr-2 w-8 h-8 text-gray-200 animate-spin fill-red-600"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -63,105 +67,106 @@ const RegisterRequests = () => {
           </svg>
           <span className="sr-only">Loading...</span>
         </div>
-      ) : ( */}
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg 2xl:p-10">
-        <table className="w-max 2xl:w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="py-3 px-6">
-                Title
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Proff
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Approval
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Rejection
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Feedback
-              </th>
-            </tr>
-          </thead>
+      ) : (
+        <div className="overflow-x-auto relative shadow-md sm:rounded-lg 2xl:p-10">
+          <table className="w-max 2xl:w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-red-200 ">
+              <tr>
+                <th scope="col" className="py-3 px-6">
+                  Title
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Proff
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Approval
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Rejection
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Feedback
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {response && response.length >= 1
-              ? response.map((item, index) => (
-                  <tr
-                    key={index + 1}
-                    className="cursor-pointer bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            <tbody>
+              {response && response.length >= 1
+                ? response.map((item, index) => (
+                    <tr
+                      key={index + 1}
+                      className="cursor-pointer bg-gray-200 border-b  hover:bg-gray-50"
+                      onClick={() => {
+                        handleClick(item.proof);
+                      }}
+                    >
+                      <th
+                        scope="row"
+                        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        {item.event.title}
+                      </th>
+                      <td className="py-4 px-6">
+                        <img src={item.proof} className=" w-12 h-12" />
+                      </td>
+
+                      <td className="py-4 px-6">
+                        {item.isApproved === true ? (
+                          <FcApproval className="w-10 h-8 " />
+                        ) : (
+                          <FcCancel className="w-10 h-8" />
+                        )}
+                      </td>
+                      <td className="py-4 px-6">
+                        {item.isRejected === true ? (
+                          <FcApproval className="w-10 h-8 " />
+                        ) : (
+                          <FcCancel className="w-10 h-8" />
+                        )}
+                      </td>
+                      <td className="py-4 px-6">{item.event.feedback}</td>
+                    </tr>
+                  ))
+                : ""}
+            </tbody>
+          </table>
+          {/* model */}
+          <div
+            id="staticModal"
+            data-modal-backdrop="static"
+            tabIndex="-1"
+            aria-hidden="true"
+            className={`${
+              openAddManger
+                ? "overflow-y-auto overflow-x-hidden 2xl:fixed right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full grid justify-items-center mt-10"
+                : "hidden"
+            }`}
+          >
+            <div className="relative w-full h-full max-w-2xl md:h-auto">
+              <div className="relative bg-gray-100 rounded-lg shadow ">
+                <div className="flex items-start justify-between p-4 border-b rounded-t ">
+                  <h3 className="text-xl font-semibold text-red-600 ">
+                    Register Proof
+                  </h3>
+                  <button
+                    type="button"
+                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                    data-modal-toggle="staticModal"
                     onClick={() => {
-                      handleClick(item.proof);
+                      setOpenAddManager(false);
                     }}
                   >
-                    <th
-                      scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      {item.event.title}
-                    </th>
-                    <td className="py-4 px-6">
-                      <img src={item.proof} className=" w-12 h-12" />
-                    </td>
-
-                    <td className="py-4 px-6">
-                      {item.isApproved === true ? (
-                        <FcApproval className="w-10 h-8 " />
-                      ) : (
-                        <FcCancel className="w-10 h-8" />
-                      )}
-                    </td>
-                    <td className="py-4 px-6">
-                      {item.isRejected === true ? (
-                        <FcApproval className="w-10 h-8 " />
-                      ) : (
-                        <FcCancel className="w-10 h-8" />
-                      )}
-                    </td>
-                    <td className="py-4 px-6">{item.event.feedback}</td>
-                  </tr>
-                ))
-              : ""}
-          </tbody>
-        </table>
-        {/* model */}
-        <div
-          id="staticModal"
-          data-modal-backdrop="static"
-          tabIndex="-1"
-          aria-hidden="true"
-          className={`${
-            openAddManger
-              ? "overflow-y-auto overflow-x-hidden 2xl:fixed right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full grid justify-items-center mt-10"
-              : "hidden"
-          }`}
-        >
-          <div className="relative w-full h-full max-w-2xl md:h-auto">
-            <div className="relative bg-gray-100 rounded-lg shadow ">
-              <div className="flex items-start justify-between p-4 border-b rounded-t ">
-                <h3 className="text-xl font-semibold text-red-600 ">
-                  Register Proof
-                </h3>
-                <button
-                  type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                  data-modal-toggle="staticModal"
-                  onClick={() => {
-                    setOpenAddManager(false);
-                  }}
-                >
-                  <MdClose className="w-5 h-5 hover:text-red-100-600" />
-                </button>
-              </div>
-              <div className="p-6 flex flex-col items-center gap-4">
-                <img src={photo} className="w-[25rem] h-[25rem] rounded-xl" />
+                    <MdClose className="w-5 h-5 hover:text-red-100-600" />
+                  </button>
+                </div>
+                <div className="p-6 flex flex-col items-center gap-4">
+                  <img src={photo} className="w-[25rem] h-[25rem] rounded-xl" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

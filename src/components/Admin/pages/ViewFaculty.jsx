@@ -45,8 +45,8 @@ const ViewFaculty = () => {
           List of All the Faculty Members
         </h1>
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-red-200 ">
               <tr>
                 <th scope="col" className="py-3 px-6">
                   Name
@@ -60,26 +60,30 @@ const ViewFaculty = () => {
                 <th scope="col" className="py-3 px-6">
                   Role
                 </th>
+                <th scope="col" className="py-3 px-6">
+                  Department
+                </th>
               </tr>
             </thead>
             {response &&
               response.map((item, index) => (
                 <tbody key={index + 1}>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr className="bg-gray-200 border-b hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                     >
                       {item.name}
                     </th>
                     <th
                       scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                     >
                       {item.username}
                     </th>
                     <td className="py-4 px-6">{item.email}</td>
                     <td className="py-4 px-6">{item.role}</td>
+                    <td className="py-4 px-6">{item.department}</td>
                   </tr>
                 </tbody>
               ))}

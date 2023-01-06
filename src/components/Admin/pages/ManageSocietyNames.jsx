@@ -152,7 +152,7 @@ const ManageSocietyNames = () => {
                     New Society name:
                   </label>
                   <input
-                    class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-1/5 appearance-none leading-normal"
+                    class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
                     type="text"
                     placeholder="name"
                     onChange={(e) => setSociety(e.target.value)}
@@ -163,22 +163,34 @@ const ManageSocietyNames = () => {
                     Scopes:
                   </label>
                   <input
-                    class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-2/5 appearance-none leading-normal"
+                    class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
                     type="text"
                     placeholder="cricket,football without spaces"
                     onChange={(e) => setScopes(e.target.value.split(","))}
                   />
                 </div>
-                <div className="mt-5 relative">
-                  <label class="text-gray-700 font-bold block mb-2">
-                    Department:
-                  </label>
-                  <input
-                    class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-1/5 appearance-none leading-normal"
-                    type="text"
-                    placeholder="CS"
+                <div className="mt-8 relative">
+                  <select
+                    name="dropdown"
+                    id="dropdown"
+                    className="inline-block px-4 py-2 ring-2 mb-2 text-white bg-red-500 rounded shadow uppercase hover:bg-red-800 focus:ring-red-900 hover:scale-110 duration-200"
                     onChange={(e) => setDeparment(e.target.value)}
-                  />
+                  >
+                    <option value="*">Select Department</option>
+                    <option value="BBA">BBA</option>
+                    <option value="CS">CS</option>
+                    <option value="SE">SE</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="EE">EE</option>
+                    <option value="CE">CE</option>
+                    <option value="ME">ME</option>
+                    <option value="Biosciences">Biosciences</option>
+                    <option value="Biotechnology">Biotechnology</option>
+                    <option value="Microbiology">Microbiology</option>
+                    <option value="AF">AF</option>
+                    <option value="Pharm.D">Pharm.D</option>
+                    <option value="None">None</option>
+                  </select>
                 </div>
                 <button
                   type="button"
@@ -212,6 +224,7 @@ const ManageSocietyNames = () => {
               <option value="Microbiology">Microbiology</option>
               <option value="AF">AF</option>
               <option value="Pharm.D">Pharm.D</option>
+              <option value="None">None</option>
             </select>
           </div>
         )}
@@ -220,6 +233,7 @@ const ManageSocietyNames = () => {
           <div className="mt-10 relative">
             {patList.map((item, index) => (
               <select
+                key={index}
                 name="dropdown"
                 id="dropdown"
                 className="ml-5 inline-block px-4 py-2 ring-2  text-white bg-red-500 rounded shadow uppercase hover:bg-red-800 focus:ring-red-900 hover:scale-110 duration-200"
@@ -247,8 +261,8 @@ const ManageSocietyNames = () => {
         <h1 className="mt-6 p-5 text-2xl font-bold">Existing Societies</h1>
 
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 ">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-red-200 ">
               <tr>
                 <th scope="col" className="py-3 px-6">
                   #
@@ -274,10 +288,10 @@ const ManageSocietyNames = () => {
             <tbody>
               {response &&
                 response.map((item, index) => (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr className="bg-gray-200 border-b  hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                     >
                       {index + 1}
                     </th>
@@ -296,7 +310,7 @@ const ManageSocietyNames = () => {
                     <td className="py-4 px-6 flex ">
                       <button
                         type="button"
-                        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 cursor-pointer hover:scale-110 duration-200"
+                        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5  cursor-pointer hover:scale-110 duration-200"
                         onClick={() => {
                           setPatronToggle(!patronToggle);
                           setSocietyId(item._id);
@@ -306,7 +320,7 @@ const ManageSocietyNames = () => {
                       </button>
                       <button
                         type="button"
-                        className="ml-1 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 cursor-pointer hover:scale-110 duration-200"
+                        className="ml-1 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5  cursor-pointer hover:scale-110 duration-200"
                         onClick={() => {
                           handleDeleteSociety(item._id);
                         }}

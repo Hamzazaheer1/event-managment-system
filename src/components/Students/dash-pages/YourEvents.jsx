@@ -53,7 +53,7 @@ const YourEvents = () => {
       {isLoading ? (
         <div role="status" className="flex justify-center pb-10">
           <svg
-            className="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
+            className="inline mr-2 w-8 h-8 text-gray-200 animate-spin fill-red-600"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -71,8 +71,8 @@ const YourEvents = () => {
         </div>
       ) : (
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg 2xl:p-10">
-          <table className="w-max 2xl:w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-max 2xl:w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-red-200  ">
               <tr>
                 <th scope="col" className="py-3 px-6">
                   Title
@@ -106,11 +106,11 @@ const YourEvents = () => {
                 response.map((item, index) => (
                   <tr
                     key={index + 1}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    className="bg-gray-200 border-b hover:bg-gray-50 "
                   >
                     <th
                       scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                     >
                       {item.title}
                     </th>
@@ -154,7 +154,7 @@ const YourEvents = () => {
                       {item.feedback?.map((item, index) => (
                         <tr key={index + 1}>
                           <tr>{item.message}</tr>
-                          <tr className="font-semibold text-white">
+                          <tr className="font-semibold text-black">
                             {item.user.name}
                           </tr>
                         </tr>

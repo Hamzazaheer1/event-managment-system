@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Home from "./dash-pages/Home";
 import OrganizeEvent from "./dash-pages/OrganizeEvent";
 import YourEvents from "./dash-pages/YourEvents";
-import Society from "./dash-pages/Society";
+// import Society from "./dash-pages/Society";
 import UpcomingEvents from "./dash-pages/UpcomingEvents";
 import custLogo from "../images/CUST-Logo.png";
 import GeneralInfo from "./dash-pages/GeneralInfo";

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FcFolder } from "react-icons/fc";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { saveAs } from "file-saver";
 import axios from "axios";
 
 const ViewGallery = () => {
@@ -38,6 +39,10 @@ const ViewGallery = () => {
     } catch (err) {
       console.log(err.response.data.message);
     }
+  };
+
+  const downloadImage = (path) => {
+    saveAs(path);
   };
 
   return (
@@ -90,6 +95,9 @@ const ViewGallery = () => {
                       className="w-52 h-52 max-w-xs 2xl:max-w-lg rounded-lg transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
                       src={item.link}
                       alt={index + 1}
+                      onClick={() => {
+                        downloadImage(item.link);
+                      }}
                     />
                   </div>
                 ))}

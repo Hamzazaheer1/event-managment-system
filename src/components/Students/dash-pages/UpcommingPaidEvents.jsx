@@ -84,11 +84,14 @@ const UpcomingPaidEvents = () => {
             </label>
             <input
               type="file"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 w-auto "
               required
               onChange={(e) => setPhoto(e.target.files[0])}
             />
-            <button className="bg-red-500 p-2 border " onClick={RegisterEvent}>
+            <button
+              className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 "
+              onClick={RegisterEvent}
+            >
               Submit
             </button>
           </div>

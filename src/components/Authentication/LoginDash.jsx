@@ -48,7 +48,7 @@ const LoginDash = () => {
             {cardData.map((item) => (
               <div
                 key={item.id}
-                className="w-64 2xl:w-52 hover:scale-105 duration-200 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 cursor-pointer"
+                className="w-64 2xl:w-52 hover:scale-105 duration-200 bg-gray-300 rounded-lg border border-gray-200 shadow-md cursor-pointer"
                 onClick={() => {
                   if (item.id === 1) {
                     Navigate("/std-login");
@@ -61,7 +61,7 @@ const LoginDash = () => {
               >
                 <img className="rounded-t-lg" src={item.image} alt="" />
                 <div className="p-5">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
                     {item.cardName}
                   </h5>
                 </div>

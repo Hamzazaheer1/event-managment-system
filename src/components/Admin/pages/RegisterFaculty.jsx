@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import axios from "axios";
 
-const RegUser = /^[a-zA-Z0-9_.]{3,30}$/;
+const RegUser = /^[a-zA-Z.]{3,20}$/;
 // eslint-disable-next-line
 const RegPwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
@@ -144,11 +144,11 @@ const RegisterFaculty = () => {
             }
           >
             <span className="flex gap-2 items-center -mb-4">
-              <FaInfoCircle /> Only letters (uppercase or lowercase), digits,
-              underscores and dots are allowed.
+              <FaInfoCircle /> Only letters (uppercase or lowercase), and dot
+              are allowed.
             </span>
             <br />
-            The username must be at least 3 characters and no more than 30
+            The username must be at least 3 characters and no more than 20
             characters long.
           </p>
         </div>

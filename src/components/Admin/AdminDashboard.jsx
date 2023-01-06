@@ -4,7 +4,7 @@ import AHome from "./pages/AHome";
 // import ApprovedEvents from "./pages/ApprovedEvents";
 import GeneralInfo from "./pages/GeneralInfo";
 import ManageEvents from "./pages/ManageEvents";
-import ManageEventTypes from "./pages/ManageEventTypes";
+// import ManageEventTypes from "./pages/ManageEventTypes";
 import ManageGallery from "./pages/ManageGallery";
 import ManageSocietyNames from "./pages/ManageSocietyNames";
 import RegisterFaculty from "./pages/RegisterFaculty";
@@ -23,8 +23,8 @@ const data = [
   { id: 6, name: "Admin's General Info" },
   { id: 7, name: "View All Students" },
   { id: 8, name: "Manage Societies" },
-  { id: 9, name: "Manage Events Types" },
-  { id: 10, name: "Manage Gallery" },
+  // { id: 9, name: "Manage Events Types" },
+  { id: 9, name: "Manage Gallery" },
 ];
 
 const DeanDashboard = () => {
@@ -115,8 +115,8 @@ const DeanDashboard = () => {
           {pageSelector === 6 && <GeneralInfo />}
           {pageSelector === 7 && <ViewStudents />}
           {pageSelector === 8 && <ManageSocietyNames />}
-          {pageSelector === 9 && <ManageEventTypes />}
-          {pageSelector === 10 && <ManageGallery />}
+          {/* {pageSelector === 9 && <ManageEventTypes />} */}
+          {pageSelector === 9 && <ManageGallery />}
         </div>
       </div>
     </div>
