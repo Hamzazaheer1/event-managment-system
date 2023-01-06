@@ -39,6 +39,13 @@ const YourEvents = () => {
     apiHandler();
   }, [bearer, error]);
 
+  console.log(response);
+
+  function convertDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  }
+
   return (
     <div className=" bg-gray-100 shadow-lg rounded-lg">
       <h1 className=" p-5 text-2xl font-bold ">Your Events</h1>
@@ -88,6 +95,9 @@ const YourEvents = () => {
                 <th scope="col" className="py-3 px-6">
                   Admin Approval
                 </th>
+                <th scope="col" className="py-3 px-6">
+                  Feedbacks
+                </th>
               </tr>
             </thead>
 
@@ -104,7 +114,7 @@ const YourEvents = () => {
                     >
                       {item.title}
                     </th>
-                    <td className="py-4 px-6">{item.createdAt}</td>
+                    <td className="py-4 px-6">{convertDate(item.createdAt)}</td>
                     <td className="py-4 px-6">
                       {item.isPaid === true ? (
                         <span className="font-semibold text-red-500">Paid</span>
@@ -139,6 +149,16 @@ const YourEvents = () => {
                       ) : (
                         <FcCancel className=" w-10 h-8 " />
                       )}
+                    </td>
+                    <td className="py-4 px-6">
+                      {item.feedback?.map((item, index) => (
+                        <tr key={index + 1}>
+                          <tr>{item.message}</tr>
+                          <tr className="font-semibold text-white">
+                            {item.user.name}
+                          </tr>
+                        </tr>
+                      ))}
                     </td>
                   </tr>
                 ))}

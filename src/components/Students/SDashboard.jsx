@@ -9,6 +9,7 @@ import GeneralInfo from "./dash-pages/GeneralInfo";
 import { useNavigate } from "react-router-dom";
 import ViewGallery from "../Shared/ViewGallery";
 import UpcomingPaidEvents from "./dash-pages/UpcommingPaidEvents";
+import RegisterRequests from "./dash-pages/RegisterRequests";
 
 const SDashboard = () => {
   const [pageSelector, setPageSelector] = useState(1);
@@ -42,8 +43,9 @@ const SDashboard = () => {
     { id: 4, name: "society" },
     { id: 5, name: "upcoming paid events" },
     { id: 6, name: "upcoming events" },
-    { id: 7, name: "gallery" },
-    { id: 8, name: "profile" },
+    { id: 7, name: "register requests" },
+    { id: 8, name: "gallery" },
+    { id: 9, name: "profile" },
   ];
 
   return (
@@ -116,8 +118,9 @@ const SDashboard = () => {
           {pageSelector === 4 && <Society />}
           {pageSelector === 5 && <UpcomingPaidEvents />}
           {pageSelector === 6 && <UpcomingEvents />}
-          {pageSelector === 7 && <ViewGallery />}
-          {pageSelector === 8 && <GeneralInfo />}
+          {pageSelector === 7 && <RegisterRequests />}
+          {pageSelector === 8 && <ViewGallery />}
+          {pageSelector === 9 && <GeneralInfo />}
         </div>
       </div>
     </div>

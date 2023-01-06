@@ -97,7 +97,7 @@ const OrganizeEvent = () => {
         }
       );
 
-      console.log(resp);
+      // console.log(resp);
       alert("sucess");
       setIsLoading(false);
     } catch (err) {

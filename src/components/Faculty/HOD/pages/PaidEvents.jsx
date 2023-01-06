@@ -15,6 +15,7 @@ const PaidEvents = () => {
   const [eventSelector, setEventSelector] = useState(false);
   const [eventID, setEventId] = useState(0);
   const [singleEvent, setSingleEvent] = useState();
+  const [feedback, setFeedback] = useState("");
 
   function convertDate(dateString) {
     const date = new Date(dateString);
@@ -88,16 +89,19 @@ const PaidEvents = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3001/api/v1/events/delete/${eventID}`,
+        `http://localhost:3001/api/v1/events/rejecthod/${eventID}`,
         {
-          method: "DELETE",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: bearer,
           },
+          body: {
+            message: feedback,
+          },
         }
       );
-      console.log(response);
+      console.log(response.json);
 
       alert("Event Rejected Sucessfully..");
     } catch (err) {
@@ -168,7 +172,7 @@ const PaidEvents = () => {
       {/* model */}
       <div
         id="defaultModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-hidden="true"
         className={`${
           eventSelector ? " " : "hidden"
@@ -413,7 +417,7 @@ const PaidEvents = () => {
                 <p className="leading-relaxed text-white text-xl bg-gray-800 p-2 flex">
                   Your Approval Status:
                   <span className="pl-3 text-gray-400">
-                    {singleEvent.isPatronApproved === true ? (
+                    {singleEvent.isHODApproved === true ? (
                       <FcApproval className=" w-10 h-8 " />
                     ) : (
                       <FcCancel className=" w-10 h-8 " />
@@ -438,6 +442,14 @@ const PaidEvents = () => {
               >
                 Decline
               </button>
+            </div>
+            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+              <textarea
+                rows="4"
+                className="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="To decline write your feedback here... and press the decline button above"
+                onChange={(e) => setFeedback(e.target.value)}
+              />
             </div>
           </div>
         </div>

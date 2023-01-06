@@ -61,7 +61,7 @@ const GeneralInfo = () => {
           },
         }
       );
-      console.log(resp);
+      // console.log(resp);
       alert("Password Updated Sucessfully...");
       Navigate("/admin-login");
     } catch (err) {

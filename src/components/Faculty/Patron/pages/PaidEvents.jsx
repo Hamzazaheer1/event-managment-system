@@ -15,6 +15,7 @@ const PaidEvents = () => {
   const [eventSelector, setEventSelector] = useState(false);
   const [eventID, setEventId] = useState(0);
   const [singleEvent, setSingleEvent] = useState();
+  const [feedback, setFeedback] = useState("");
 
   function convertDate(dateString) {
     const date = new Date(dateString);
@@ -34,17 +35,17 @@ const PaidEvents = () => {
         );
 
         setResponse(resp.data.PaidEvents);
-        console.log(resp.data.PaidEvents);
+        // console.log(resp.data.PaidEvents);
         setError(null);
       } catch (err) {
-        setError(err);
+        // setError(err);
         setResponse(null);
-        console.log(error);
+        // console.log(error);
       }
     };
 
     apiHandler();
-  }, [bearer, error, response]);
+  }, [bearer, response]);
 
   const handleSingleEvent = async () => {
     try {
@@ -59,7 +60,7 @@ const PaidEvents = () => {
       setSingleEvent(resp.data.data);
       console.log("single ", resp.data.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       alert("Error...");
     }
   };
@@ -77,7 +78,7 @@ const PaidEvents = () => {
           },
         }
       );
-      console.log(response);
+      // console.log(response);
       alert("Event Approved Sucessfully..");
     } catch (err) {
       console.log(err);
@@ -88,16 +89,19 @@ const PaidEvents = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3001/api/v1/events/delete/${eventID}`,
+        `http://localhost:3001/api/v1/events/rejectpatron/${eventID}`,
         {
-          method: "DELETE",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: bearer,
           },
+          body: {
+            message: feedback,
+          },
         }
       );
-      console.log(response);
+      console.log(response.json);
 
       alert("Event Rejected Sucessfully..");
     } catch (err) {
@@ -250,7 +254,7 @@ const PaidEvents = () => {
                   Student Details
                 </h1>
                 <div className="bg-gray-800 p-2 grid gap-2 ">
-                  {singleEvent.student.length > 1 ? (
+                  {singleEvent.student.length >= 1 ? (
                     singleEvent.student.map((item) => (
                       <div className="grid grid-cols-3">
                         <p className="leading-relaxed text-white text-xl  ">
@@ -438,6 +442,14 @@ const PaidEvents = () => {
               >
                 Decline
               </button>
+            </div>
+            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+              <textarea
+                rows="4"
+                class="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="To decline write your feedback here... and press the decline button above"
+                onChange={(e) => setFeedback(e.target.value)}
+              />
             </div>
           </div>
         </div>

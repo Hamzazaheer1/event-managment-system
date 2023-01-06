@@ -286,7 +286,7 @@ const ManageEvents = () => {
                       Student Details
                     </h1>
                     <div className="bg-gray-800 p-2 grid gap-2 ">
-                      {singleEvent.student.length > 1 ? (
+                      {singleEvent.student.length >= 1 ? (
                         singleEvent.student.map((item) => (
                           <div className="grid grid-cols-3">
                             <p className="leading-relaxed text-white text-xl  ">

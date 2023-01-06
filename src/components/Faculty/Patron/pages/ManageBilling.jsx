@@ -1,6 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { FcApproval, FcCancel } from "react-icons/fc";
+import { MdClose } from "react-icons/md";
+import axios from "axios";
 
 const ManageBilling = () => {
+  let jwt;
+  if (localStorage.Patron) {
+    jwt = localStorage.getItem("Patron");
+  }
+
+  const bearer = "Bearer " + jwt;
+  const [response, setResponse] = useState();
+  const [photo, setPhoto] = useState("");
+  const [openAddManger, setOpenAddManager] = useState(false);
+
+  useEffect(() => {
+    const apiHandler = async () => {
+      try {
+        const resp = await axios.get(
+          "http://localhost:3001/api/v1/register/myregisters",
+          {
+            headers: {
+              authorization: bearer,
+            },
+          }
+        );
+        setResponse(resp.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    apiHandler();
+  }, [bearer]);
+
+  const handleClick = (photo) => {
+    setPhoto(photo);
+    setOpenAddManager(true);
+  };
+
   return (
     <div className=" bg-gray-100 shadow-lg rounded-lg">
       <h1 className="p-5 text-2xl font-bold">Manage Billing Info</h1>
@@ -10,50 +47,52 @@ const ManageBilling = () => {
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="py-3 px-6">
-                  Title
+                  Event Title
                 </th>
                 <th scope="col" className="py-3 px-6">
-                  Bank Name
+                  Student Regno
                 </th>
                 <th scope="col" className="py-3 px-6">
-                  Acc Number
-                </th>
-                <th scope="col" className="py-3 px-6">
-                  Amount
+                  Proof
                 </th>
               </tr>
             </thead>
             <tbody>
-              {/* {response &&
-                response.map((item, index) => (
-                  <tr
-                    key={index + 1}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                  >
-                    <th
-                      scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              {response && response.length >= 1
+                ? response.map((item, index) => (
+                    <tr
+                      key={index + 1}
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                     >
-                      {item.title}
-                    </th>
-                    <td className="py-4 px-6">{item.supervisfacname}</td>
-                    <td className="py-4 px-6">{item.contctpersonregno}</td>
-                    <td className="py-4 px-6">{item.contctpersonmobile}</td>
-                    <td className="py-4 px-6">{convertDate(item.createdAt)}</td>
-                    <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
-                      <button
-                        type="button"
-                        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                        onClick={() => {
-                          setEventId(item.id);
-                          setEventSelector(!eventSelector);
-                        }}
+                      <th
+                        scope="row"
+                        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        Action
-                      </button>
-                    </td>
-                  </tr>
-                ))} */}
+                        {item.title}
+                      </th>
+                      <td className="py-4 px-6">{item.event.title}</td>
+                      <td className="py-4 px-6">{item.student.regno}</td>
+                      <td className="py-4 px-6">
+                        <img src={item.proof} className=" w-12 h-12" />
+                      </td>
+                      <td className="py-4 px-6">
+                        {convertDate(item.createdAt)}
+                      </td>
+                      <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
+                        <button
+                          type="button"
+                          className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                          onClick={() => {
+                            setEventId(item.id);
+                            setEventSelector(!eventSelector);
+                          }}
+                        >
+                          Action
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                : ""}
             </tbody>
           </table>
         </div>

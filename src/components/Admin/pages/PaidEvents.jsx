@@ -25,7 +25,7 @@ const PaidEvents = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:3001/api/v1/events/pendingpatron",
+          "http://localhost:3001/api/v1/events/pendingAdmin",
           {
             headers: {
               authorization: bearer,
@@ -250,51 +250,52 @@ const PaidEvents = () => {
                   Student Details
                 </h1>
                 <div className="bg-gray-800 p-2 grid gap-2 ">
-                  {singleEvent.student.length > 1 ? (
-                    singleEvent.student.map((item) => (
-                      <div className="grid grid-cols-3">
-                        <p className="leading-relaxed text-white text-xl  ">
-                          Name
-                          <span className="pl-3 text-gray-400">
-                            {item.stdname}
-                          </span>
-                        </p>
-                        <p className="leading-relaxed text-white text-xl  ">
-                          RegNo.
-                          <span className="pl-3 text-gray-400">
-                            {item.stdregno}
-                          </span>
-                        </p>
-                        <p className="leading-relaxed text-white text-xl  ">
-                          Role
-                          <span className="pl-3 text-gray-400">
-                            {item.stdrole}
-                          </span>
-                        </p>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="grid grid-cols-3">
-                      <p className="leading-relaxed text-white text-xl  ">
-                        Name
-                        <span className="pl-3 text-gray-400">
-                          {singleEvent.student.stdname}
-                        </span>
-                      </p>
-                      <p className="leading-relaxed text-white text-xl  ">
-                        RegNo.
-                        <span className="pl-3 text-gray-400">
-                          {singleEvent.student.stdregno}
-                        </span>
-                      </p>
-                      <p className="leading-relaxed text-white text-xl  ">
-                        Role
-                        <span className="pl-3 text-gray-400">
-                          {singleEvent.student.stdrole}
-                        </span>
-                      </p>
-                    </div>
-                  )}
+                  {
+                    singleEvent.student.length >= 1
+                      ? singleEvent.student.map((item) => (
+                          <div className="grid grid-cols-3">
+                            <p className="leading-relaxed text-white text-xl  ">
+                              Name
+                              <span className="pl-3 text-gray-400">
+                                {item.stdname}
+                              </span>
+                            </p>
+                            <p className="leading-relaxed text-white text-xl  ">
+                              RegNo.
+                              <span className="pl-3 text-gray-400">
+                                {item.stdregno}
+                              </span>
+                            </p>
+                            <p className="leading-relaxed text-white text-xl  ">
+                              Role
+                              <span className="pl-3 text-gray-400">
+                                {item.stdrole}
+                              </span>
+                            </p>
+                          </div>
+                        ))
+                      : ""
+                    // <div className="grid grid-cols-3">
+                    //   <p className="leading-relaxed text-white text-xl  ">
+                    //     Name
+                    //     <span className="pl-3 text-gray-400">
+                    //       {singleEvent.student.stdname}
+                    //     </span>
+                    //   </p>
+                    //   <p className="leading-relaxed text-white text-xl  ">
+                    //     RegNo.
+                    //     <span className="pl-3 text-gray-400">
+                    //       {singleEvent.student.stdregno}
+                    //     </span>
+                    //   </p>
+                    //   <p className="leading-relaxed text-white text-xl  ">
+                    //     Role
+                    //     <span className="pl-3 text-gray-400">
+                    //       {singleEvent.student.stdrole}
+                    //     </span>
+                    //   </p>
+                    // </div>
+                  }
                 </div>
                 <h1 className="bg-red-500 text-white rounded p-2 text-xl">
                   Contact Person's Details
@@ -413,7 +414,7 @@ const PaidEvents = () => {
                 <p className="leading-relaxed text-white text-xl bg-gray-800 p-2 flex">
                   Your Approval Status:
                   <span className="pl-3 text-gray-400">
-                    {singleEvent.isPatronApproved === true ? (
+                    {singleEvent.isAdminApproved === true ? (
                       <FcApproval className=" w-10 h-8 " />
                     ) : (
                       <FcCancel className=" w-10 h-8 " />

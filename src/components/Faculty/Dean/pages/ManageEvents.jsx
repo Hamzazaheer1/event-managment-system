@@ -17,6 +17,7 @@ const ManageEvents = () => {
   const [eventID, setEventId] = useState(0);
   const [singleEvent, setSingleEvent] = useState();
   const [toggle, setToggle] = useState(true);
+  const [feedback, setFeedback] = useState("");
 
   function convertDate(dateString) {
     const date = new Date(dateString);
@@ -93,6 +94,9 @@ const ManageEvents = () => {
           headers: {
             "Content-Type": "application/json",
             Authorization: bearer,
+          },
+          body: {
+            message: feedback,
           },
         }
       );
@@ -283,51 +287,52 @@ const ManageEvents = () => {
                       Student Details
                     </h1>
                     <div className="bg-gray-800 p-2 grid gap-2 ">
-                      {singleEvent.student.length > 1 ? (
-                        singleEvent.student.map((item) => (
-                          <div className="grid grid-cols-3">
-                            <p className="leading-relaxed text-white text-xl  ">
-                              Name
-                              <span className="pl-3 text-gray-400">
-                                {item.stdname}
-                              </span>
-                            </p>
-                            <p className="leading-relaxed text-white text-xl  ">
-                              RegNo.
-                              <span className="pl-3 text-gray-400">
-                                {item.stdregno}
-                              </span>
-                            </p>
-                            <p className="leading-relaxed text-white text-xl  ">
-                              Role
-                              <span className="pl-3 text-gray-400">
-                                {item.stdrole}
-                              </span>
-                            </p>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="grid grid-cols-3">
-                          <p className="leading-relaxed text-white text-xl  ">
-                            Name
-                            <span className="pl-3 text-gray-400">
-                              {singleEvent.student.stdname}
-                            </span>
-                          </p>
-                          <p className="leading-relaxed text-white text-xl  ">
-                            RegNo.
-                            <span className="pl-3 text-gray-400">
-                              {singleEvent.student.stdregno}
-                            </span>
-                          </p>
-                          <p className="leading-relaxed text-white text-xl  ">
-                            Role
-                            <span className="pl-3 text-gray-400">
-                              {singleEvent.student.stdrole}
-                            </span>
-                          </p>
-                        </div>
-                      )}
+                      {
+                        singleEvent.student.length >= 1
+                          ? singleEvent.student.map((item) => (
+                              <div className="grid grid-cols-3">
+                                <p className="leading-relaxed text-white text-xl  ">
+                                  Name
+                                  <span className="pl-3 text-gray-400">
+                                    {item.stdname}
+                                  </span>
+                                </p>
+                                <p className="leading-relaxed text-white text-xl  ">
+                                  RegNo.
+                                  <span className="pl-3 text-gray-400">
+                                    {item.stdregno}
+                                  </span>
+                                </p>
+                                <p className="leading-relaxed text-white text-xl  ">
+                                  Role
+                                  <span className="pl-3 text-gray-400">
+                                    {item.stdrole}
+                                  </span>
+                                </p>
+                              </div>
+                            ))
+                          : ""
+                        // <div className="grid grid-cols-3">
+                        //   <p className="leading-relaxed text-white text-xl  ">
+                        //     Name
+                        //     <span className="pl-3 text-gray-400">
+                        //       {singleEvent.student.stdname}
+                        //     </span>
+                        //   </p>
+                        //   <p className="leading-relaxed text-white text-xl  ">
+                        //     RegNo.
+                        //     <span className="pl-3 text-gray-400">
+                        //       {singleEvent.student.stdregno}
+                        //     </span>
+                        //   </p>
+                        //   <p className="leading-relaxed text-white text-xl  ">
+                        //     Role
+                        //     <span className="pl-3 text-gray-400">
+                        //       {singleEvent.student.stdrole}
+                        //     </span>
+                        //   </p>
+                        // </div>
+                      }
                     </div>
                     <h1 className="bg-red-500 text-white rounded p-2 text-xl">
                       Contact Person's Details
@@ -448,6 +453,14 @@ const ManageEvents = () => {
                   >
                     Decline
                   </button>
+                </div>
+                <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                  <textarea
+                    rows="4"
+                    class="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="To decline write your feedback here... and press the decline button above"
+                    onChange={(e) => setFeedback(e.target.value)}
+                  />
                 </div>
               </div>
             </div>

@@ -108,7 +108,7 @@ const FacultyLogin = () => {
         setIsLoading(false);
         Navigate("/dean-dashboard");
       } else {
-        toast.success("Invalid faculty credentials");
+        toast.error("Invalid faculty credentials");
         await delay(2000);
         setIsLoading(false);
       }
