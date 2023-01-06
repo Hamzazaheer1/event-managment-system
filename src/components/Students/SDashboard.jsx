@@ -40,12 +40,12 @@ const SDashboard = () => {
       id: 3,
       name: "your events",
     },
-    { id: 4, name: "society" },
-    { id: 5, name: "upcoming paid events" },
-    { id: 6, name: "upcoming events" },
-    { id: 7, name: "register requests" },
-    { id: 8, name: "gallery" },
-    { id: 9, name: "profile" },
+    // { id: 4, name: "society" },
+    { id: 4, name: "upcoming paid events" },
+    { id: 5, name: "upcoming events" },
+    { id: 6, name: "register requests" },
+    { id: 7, name: "gallery" },
+    { id: 8, name: "profile" },
   ];
 
   return (
@@ -115,12 +115,12 @@ const SDashboard = () => {
           {pageSelector === 1 && <Home />}
           {pageSelector === 2 && <OrganizeEvent />}
           {pageSelector === 3 && <YourEvents />}
-          {pageSelector === 4 && <Society />}
-          {pageSelector === 5 && <UpcomingPaidEvents />}
-          {pageSelector === 6 && <UpcomingEvents />}
-          {pageSelector === 7 && <RegisterRequests />}
-          {pageSelector === 8 && <ViewGallery />}
-          {pageSelector === 9 && <GeneralInfo />}
+          {/* {pageSelector === 4 && <Society />} */}
+          {pageSelector === 4 && <UpcomingPaidEvents />}
+          {pageSelector === 5 && <UpcomingEvents />}
+          {pageSelector === 6 && <RegisterRequests />}
+          {pageSelector === 7 && <ViewGallery />}
+          {pageSelector === 8 && <GeneralInfo />}
         </div>
       </div>
     </div>
