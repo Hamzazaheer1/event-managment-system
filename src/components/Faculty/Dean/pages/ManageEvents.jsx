@@ -164,6 +164,9 @@ const ManageEvents = () => {
                     Created At
                   </th>
                   <th scope="col" className="py-3 px-6">
+                    Feedbacks
+                  </th>
+                  <th scope="col" className="py-3 px-6">
                     Actions
                   </th>
                 </tr>
@@ -185,6 +188,17 @@ const ManageEvents = () => {
                       <td className="py-4 px-6">{item.contctpersonregno}</td>
                       <td className="py-4 px-6">{item.contctpersonmobile}</td>
                       <td className="py-4 px-6">{item.createdAt}</td>
+                      <td className="py-4 px-6">
+                        {item.feedback?.map((item) => (
+                          <tr>
+                            {item.message}
+                            <br />
+                            <span className="text-red-500">
+                              {item.user.name}
+                            </span>
+                          </tr>
+                        ))}
+                      </td>
                       <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
                         <button
                           type="button"

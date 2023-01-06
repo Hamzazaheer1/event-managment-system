@@ -85,25 +85,46 @@ const PaidEvents = () => {
     }
   };
 
-  const handleRejectedEvent = async (event) => {
-    event.preventDefault();
+  // const handleRejectedEvent = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3001/api/v1/events/rejecthod/${eventID}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //         body: {
+  //           message: feedback,
+  //         },
+  //       }
+  //     );
+  //     console.log(response.json);
+
+  //     alert("Event Rejected Sucessfully..");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const handleRejectedEvent = async (e) => {
+    e.preventDefault();
+
     try {
-      const response = await fetch(
+      const response = await axios.patch(
         `http://localhost:3001/api/v1/events/rejecthod/${eventID}`,
         {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-          body: {
-            message: feedback,
-          },
+          message: feedback,
+        },
+        {
+          headers: { authorization: bearer },
         }
       );
-      console.log(response.json);
+      console.log(response);
 
-      alert("Event Rejected Sucessfully..");
+      alert("Event rejected");
     } catch (err) {
       console.log(err);
     }
@@ -119,7 +140,7 @@ const PaidEvents = () => {
                 Title
               </th>
               <th scope="col" className="py-3 px-6">
-                Supervisor Name
+                Supervisor Name Supervisor Name
               </th>
               <th scope="col" className="py-3 px-6">
                 Student Name
@@ -129,6 +150,9 @@ const PaidEvents = () => {
               </th>
               <th scope="col" className="py-3 px-6">
                 Created At
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Feedbacks
               </th>
               <th scope="col" className="py-3 px-6">
                 Actions
@@ -152,6 +176,15 @@ const PaidEvents = () => {
                   <td className="py-4 px-6">{item.contctpersonregno}</td>
                   <td className="py-4 px-6">{item.contctpersonmobile}</td>
                   <td className="py-4 px-6">{convertDate(item.createdAt)}</td>
+                  <td className="py-4 px-6">
+                    {item.feedback?.map((item) => (
+                      <tr>
+                        {item.message}
+                        <br />
+                        <span className="text-red-500">{item.user.name}</span>
+                      </tr>
+                    ))}
+                  </td>
                   <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
                     <button
                       type="button"
@@ -254,7 +287,7 @@ const PaidEvents = () => {
                   Student Details
                 </h1>
                 <div className="bg-gray-800 p-2 grid gap-2 ">
-                  {singleEvent.student.length > 1 ? (
+                  {singleEvent.student.length >= 1 ? (
                     singleEvent.student.map((item) => (
                       <div className="grid grid-cols-3">
                         <p className="leading-relaxed text-white text-xl  ">

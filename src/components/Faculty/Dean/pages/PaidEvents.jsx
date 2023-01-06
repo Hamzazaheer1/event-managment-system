@@ -13,7 +13,7 @@ const PaidEvents = () => {
   const [response, setResponse] = useState();
   const [error, setError] = useState();
   const [eventSelector, setEventSelector] = useState(false);
-  const [eventID, setEventId] = useState(0);
+  const [eventID, setEventId] = useState("");
   const [singleEvent, setSingleEvent] = useState();
   const [feedback, setFeedback] = useState("");
 
@@ -85,29 +85,51 @@ const PaidEvents = () => {
     }
   };
 
-  const handleRejectedEvent = async (event) => {
-    event.preventDefault();
+  const handleRejectedEvent = async (e) => {
+    e.preventDefault();
+
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/events/delete/${eventID}`,
+      const response = await axios.patch(
+        `http://localhost:3001/api/v1/events/rejectdean/${eventID}`,
         {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-          body: {
-            message: feedback,
-          },
+          message: feedback,
+        },
+        {
+          headers: { authorization: bearer },
         }
       );
-      // console.log(response);
+      console.log(response);
 
-      alert("Event Rejected Sucessfully..");
+      alert(response.message);
     } catch (err) {
       console.log(err);
     }
   };
+
+  // const handleRejectedEvent = async (event) => {
+  //   event.preventDefault();
+  //   console.log("new evesdasda", eventID);
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3001/api/v1/events/rejectdean/${eventID}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //         body: {
+  //           message: feedback,
+  //         },
+  //       }
+  //     );
+  //     console.log(response);
+
+  //     alert(response.message);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <div className=" bg-gray-100 shadow-lg rounded-lg">
@@ -131,6 +153,9 @@ const PaidEvents = () => {
                 Created At
               </th>
               <th scope="col" className="py-3 px-6">
+                Feedbacks
+              </th>
+              <th scope="col" className="py-3 px-6">
                 Actions
               </th>
             </tr>
@@ -152,6 +177,15 @@ const PaidEvents = () => {
                   <td className="py-4 px-6">{item.contctpersonregno}</td>
                   <td className="py-4 px-6">{item.contctpersonmobile}</td>
                   <td className="py-4 px-6">{convertDate(item.createdAt)}</td>
+                  <td className="py-4 px-6">
+                    {item.feedback?.map((item) => (
+                      <tr>
+                        {item.message}
+                        <br />
+                        <span className="text-red-500">{item.user.name}</span>
+                      </tr>
+                    ))}
+                  </td>
                   <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
                     <button
                       type="button"

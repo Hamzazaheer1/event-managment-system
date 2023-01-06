@@ -41,7 +41,7 @@ const FHome = () => {
         Welcome to Patron's Dashboard
       </h1>
       <h1 className="mb-4 mt-8 text-2xl font-bold">Notifications</h1>
-      <div className="mr-4 2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-50 dark:bg-red-300">
+      <div className="mr-4 2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-50 ">
         <div className="flex items-center">
           <AiFillNotification className="w-5 h-5 mr-5 text-red-500" />
           {response && response.length >= 1 ? (

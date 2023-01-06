@@ -38,6 +38,7 @@ const OrganizeEvent = () => {
   const [getPatId, setGetPatId] = useState("");
   const [paid, setPaid] = useState(false);
   const [bank, setBank] = useState({ bankname: "", accnumber: "", amount: 0 });
+  const [societyName, setSocietyName] = useState("");
 
   const [studentInput, setStudentInput] = useState([
     { stdname: "", stdregno: "", stdrole: "" },
@@ -157,8 +158,14 @@ const OrganizeEvent = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          `http://localhost:3001/api/v1/societyandtypes/societbydepartment/${getDept}`
+          `http://localhost:3001/api/v1/societyandtypes/societbydepartment/${getDept}`,
+          {
+            headers: {
+              authorization: bearer,
+            },
+          }
         );
+        // console.log(resp);
         setResponse(resp.data.data);
         setError(null);
         console.log(resp.data.data);
@@ -195,9 +202,11 @@ const OrganizeEvent = () => {
     setEventToggle(!eventToggle);
   };
 
-  const handleSocietySelection = async (xSociety, patId) => {
+  const handleSocietySelection = async (xSociety, name, patId) => {
+    console.log(name);
     handleEventClick();
     setSelectedSociety(xSociety);
+    setSocietyName(name);
     setGetPatId(patId);
   };
 
@@ -368,7 +377,12 @@ const OrganizeEvent = () => {
                     aria-expanded="true"
                     aria-haspopup="true"
                   >
-                    List of Societies
+                    {societyName != "" ? (
+                      <span>{societyName}</span>
+                    ) : (
+                      <span>List of Societies</span>
+                    )}
+
                     <AiOutlineCaretDown className="-mr-1 ml-2 h-5 w-5" />
                   </button>
                 </div>
@@ -390,7 +404,11 @@ const OrganizeEvent = () => {
                             tabindex="-1"
                             id="menu-item-0"
                             onClick={() => {
-                              handleSocietySelection(item._id, item.patron._id);
+                              handleSocietySelection(
+                                item._id,
+                                item.society,
+                                item.patron._id
+                              );
                             }}
                           >
                             {item.society}
