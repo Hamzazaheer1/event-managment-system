@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FcApproval, FcCancel } from "react-icons/fc";
-import { MdClose } from "react-icons/md";
 import axios from "axios";
 
 const ManageBilling = () => {
@@ -42,16 +41,13 @@ const ManageBilling = () => {
   const handleRegisterApprove = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/register/approve/${eventID}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-        }
-      );
+      await fetch(`http://localhost:3001/api/v1/register/approve/${eventID}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: bearer,
+        },
+      });
       alert("Register request approved");
     } catch (err) {
       console.log(err);
@@ -61,16 +57,13 @@ const ManageBilling = () => {
   const handleRegisterReject = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/register/reject/${eventID}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-        }
-      );
+      await fetch(`http://localhost:3001/api/v1/register/reject/${eventID}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: bearer,
+        },
+      });
       alert("Register request rejected");
     } catch (err) {
       console.log(err);
@@ -121,7 +114,11 @@ const ManageBilling = () => {
                       </th>
                       <td className="py-4 px-6">{item.student.regno}</td>
                       <td className="py-4 px-6">
-                        <img src={item.proof} className=" w-12 h-12" />
+                        <img
+                          src={item.proof}
+                          alt="proof img not working"
+                          className=" w-12 h-12"
+                        />
                       </td>
                       <td className="py-4 px-6">
                         {item.isApproved === true ? (
@@ -155,7 +152,7 @@ const ManageBilling = () => {
         {photo && (
           <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 col-span-1">
             <div class="w-full max-w-sm rounded-lg shadow-md bg-gray-800 border-gray-700">
-              <img class="p-8 rounded-t-lg" src={photo} alt="product image" />
+              <img class="p-8 rounded-t-lg" src={photo} alt="proof not laod" />
               <div class="px-5 pb-5 flex items-center justify-between">
                 <span class="text-3xl font-bold text-white">{regNo}</span>
               </div>

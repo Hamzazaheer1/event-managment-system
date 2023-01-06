@@ -109,11 +109,11 @@ const ManageSocietyNames = () => {
     };
 
     apiHandler();
-  }, [selectDept]);
+  }, [bearer, selectDept]);
 
   const handleAssignPatron = async () => {
     try {
-      const resp = await axios.patch(
+      await axios.patch(
         `http://localhost:3001/api/v1/societyandtypes/assignpat/${societyId}`,
         {
           patron: patId,

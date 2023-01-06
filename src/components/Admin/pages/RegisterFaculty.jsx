@@ -1,8 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import axios from "axios";
 
 const RegUser = /^[a-zA-Z0-9_.]{3,30}$/;
+// eslint-disable-next-line
 const RegPwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
 const RegisterFaculty = () => {
@@ -25,17 +26,10 @@ const RegisterFaculty = () => {
   const [validMatch, setValidMatch] = useState(false);
   const [validUName, setValidUName] = useState(false);
 
-  // const userRef = useRef();
-  // const errRef = useRef();
   const [userFocus, setUserFocus] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
 
   useEffect(() => {
     setValidUName(RegUser.test(username));

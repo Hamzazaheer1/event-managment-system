@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FcFolder, FcFile } from "react-icons/fc";
-import { GoPlus } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import axios from "axios";
 
@@ -12,7 +11,6 @@ const ManageGallery = () => {
 
   const bearer = "Bearer " + jwt;
   const [addEvent, setAddEvent] = useState(false);
-  const [option, setOption] = useState(false);
   const [createFolder, setCreateFolder] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [response, setResponse] = useState();
@@ -22,11 +20,6 @@ const ManageGallery = () => {
   const [singleFolderData, setSingleFolderData] = useState();
   const [folderId, setFolderId] = useState("");
 
-  // const handleClick = () => {
-  //   setAddEvent(!addEvent);
-  // };
-
-  // console.log(photo);
   useEffect(() => {
     const apiHandler = async () => {
       try {

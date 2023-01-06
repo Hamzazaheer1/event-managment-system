@@ -169,7 +169,11 @@ const VerifyStudents = () => {
                   </button>
                 </div>
                 <div className="p-6 flex flex-col items-center gap-4">
-                  <img src={photo} className="w-[25rem] h-[25rem] rounded-xl" />
+                  <img
+                    src={photo}
+                    alt="im not load"
+                    className="w-[25rem] h-[25rem] rounded-xl"
+                  />
                   <h1 className="text-medium font-semibold underline">
                     {name}
                   </h1>

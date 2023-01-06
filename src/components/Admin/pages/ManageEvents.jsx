@@ -19,11 +19,6 @@ const ManageEvents = () => {
   const [singleEvent, setSingleEvent] = useState();
   const [toggle, setToggle] = useState(true);
 
-  function convertDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleString();
-  }
-
   useEffect(() => {
     const apiHandler = async () => {
       try {
