@@ -158,10 +158,14 @@ const ManageBilling = () => {
         </div>
         {photo && (
           <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 col-span-1">
-            <div class="w-full max-w-sm rounded-lg shadow-md bg-gray-800 border-gray-700">
-              <img class="p-8 rounded-t-lg" src={photo} alt="proof not laod" />
-              <div class="px-5 pb-5 flex items-center justify-between">
-                <span class="text-3xl font-bold text-white">{regNo}</span>
+            <div className="w-full max-w-sm rounded-lg shadow-md bg-gray-800 border-gray-700">
+              <img
+                className="p-8 rounded-t-lg"
+                src={photo}
+                alt="proof not laod"
+              />
+              <div className="px-5 pb-5 flex items-center justify-between">
+                <span className="text-3xl font-bold text-white">{regNo}</span>
               </div>
             </div>
           </div>

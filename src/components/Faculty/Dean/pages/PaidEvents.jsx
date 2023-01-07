@@ -455,7 +455,7 @@ const PaidEvents = () => {
             <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 ">
               <textarea
                 rows="4"
-                class="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+                className="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="To decline write your feedback here... and press the decline button above"
                 onChange={(e) => setFeedback(e.target.value)}
               />

@@ -146,22 +146,22 @@ const ManageSocietyNames = () => {
             {addEvent && (
               <>
                 <div className="mt-10 relative">
-                  <label class="text-gray-700 font-bold block mb-2">
+                  <label className="text-gray-700 font-bold block mb-2">
                     New Society name:
                   </label>
                   <input
-                    class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
+                    className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
                     type="text"
                     placeholder="name"
                     onChange={(e) => setSociety(e.target.value)}
                   />
                 </div>
                 <div className="mt-5 relative">
-                  <label class="text-gray-700 font-bold block mb-2">
+                  <label className="text-gray-700 font-bold block mb-2">
                     Scopes:
                   </label>
                   <input
-                    class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
+                    className="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
                     type="text"
                     placeholder="cricket,football without spaces"
                     onChange={(e) => setScopes(e.target.value.split(","))}

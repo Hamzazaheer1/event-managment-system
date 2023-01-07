@@ -148,9 +148,9 @@ const ManageEvents = () => {
   return (
     <div className=" bg-gray-100 shadow-lg rounded-lg">
       <h1 className="p-5 text-2xl font-bold">Unverified Events List</h1>
-      <div class="text-sm font-medium text-center border-b  text-gray-400 border-gray-700">
-        <ul class="flex flex-wrap -mb-px">
-          <li class="mr-2">
+      <div className="text-sm font-medium text-center border-b  text-gray-400 border-gray-700">
+        <ul className="flex flex-wrap -mb-px">
+          <li className="mr-2">
             <span
               className={`${
                 toggle === true
@@ -164,7 +164,7 @@ const ManageEvents = () => {
               Paid Events
             </span>
           </li>
-          <li class="mr-2">
+          <li className="mr-2">
             <span
               className={`${
                 toggle === false
@@ -509,7 +509,7 @@ const ManageEvents = () => {
                 <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 ">
                   <textarea
                     rows="4"
-                    class="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                    className="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="To decline write your feedback here... and press the decline button above"
                     onChange={(e) => setFeedback(e.target.value)}
                   />

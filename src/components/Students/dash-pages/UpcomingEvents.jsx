@@ -48,25 +48,25 @@ const UpcomingEvents = () => {
         {response?.FreeEvents.length >= 1 &&
           response?.FreeEvents.map((item, index) => (
             <div
-              class="w-[20rem] p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10"
+              className="w-[20rem] p-6 bg-gradient-to-b from-red-500 to-white  border-gray-200 rounded-lg shadow-md shadow-red-400 hover:scale-105 duration-200 mt-10"
               key={index + 1}
             >
-              <p class="mb-3 font-bold text-white">
+              <p className="mb-3 font-bold text-white">
                 Department of <span>{item.department}</span>
               </p>
-              <p class="mb-3 font-bold text-black">
+              <p className="mb-3 font-bold text-black">
                 Event: <span>{item.title}</span>
               </p>
               <div className="text-black text-sm font-semibold">
-                <p class="mb-1  flex items-center gap-1">
+                <p className="mb-1  flex items-center gap-1">
                   <AiOutlineCalendar />
                   {convertDate(item.startdate)}
                 </p>
-                <p class="mb-1  flex items-center gap-1">
+                <p className="mb-1  flex items-center gap-1">
                   <AiFillClockCircle />
                   {item.duration}
                 </p>
-                <p class="mb-1  flex items-center gap-1">
+                <p className="mb-1  flex items-center gap-1">
                   <FaMapMarkerAlt />
                   {item.proposedvenue}
                 </p>
