@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { AiOutlineCalendar, AiFillClockCircle } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
 
 const UpcomingPaidEvents = () => {
   let jwt;
@@ -48,6 +49,7 @@ const UpcomingPaidEvents = () => {
     setToggle(!toggle);
     setId(id);
   };
+
   const RegisterEvent = async (event) => {
     event.preventDefault();
     let formData = new FormData();
@@ -64,9 +66,9 @@ const UpcomingPaidEvents = () => {
         }
       );
       console.log(resp);
-      alert("register request submited");
+      toast.success("register request submitted");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -136,6 +138,7 @@ const UpcomingPaidEvents = () => {
             </div>
           ))}
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
     </div>
   );
 };

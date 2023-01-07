@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { BsToggleOn } from "react-icons/bs";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const OrganizeEvent = () => {
   let jwt;
@@ -98,13 +99,12 @@ const OrganizeEvent = () => {
         }
       );
 
-      // console.log(resp);
-      alert("sucess");
+      console.log(resp);
+      toast.success("Event created");
       setIsLoading(false);
     } catch (err) {
-      console.log(err.response.data.message);
+      toast.error(err.response.data.message);
       setIsLoading(false);
-      alert(err.response.data.message);
     }
   };
 
@@ -145,12 +145,11 @@ const OrganizeEvent = () => {
       );
 
       console.log(resp);
-      alert("sucess");
+      toast.success("Event created");
       setIsLoading(false);
     } catch (err) {
-      console.log(err.response.data.message);
+      toast.error(err.response.data.message);
       setIsLoading(false);
-      alert(err.response.data.message);
     }
   };
 
@@ -773,6 +772,7 @@ const OrganizeEvent = () => {
           </form>
         </div>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
     </div>
   );
 };

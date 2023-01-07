@@ -3,6 +3,7 @@ import { ImCross } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import IdCard from "../../images/idCard.png";
+import { ToastContainer, toast } from "react-toastify";
 
 const GeneralInfo = () => {
   let jwt;
@@ -60,12 +61,12 @@ const GeneralInfo = () => {
           },
         }
       );
-      alert("Password Updated Sucessfully...");
+      toast.success("Password Updated Sucessfully...");
       console.log(resp);
       Navigate("/std-login");
     } catch (err) {
       console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -157,6 +158,7 @@ const GeneralInfo = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
     </div>
   );
 };
