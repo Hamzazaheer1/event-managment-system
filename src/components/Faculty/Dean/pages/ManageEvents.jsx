@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { ImCross } from "react-icons/im";
 import axios from "axios";
 import { FcApproval, FcCancel } from "react-icons/fc";
@@ -19,10 +20,10 @@ const ManageEvents = () => {
   const [toggle, setToggle] = useState(true);
   const [feedback, setFeedback] = useState("");
 
-  function convertDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleString();
-  }
+  // function convertDate(dateString) {
+  //   const date = new Date(dateString);
+  //   return date.toLocaleString();
+  // }
 
   useEffect(() => {
     const apiHandler = async () => {
@@ -60,50 +61,87 @@ const ManageEvents = () => {
       setSingleEvent(resp.data.data);
     } catch (err) {
       console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
+  // const handleApproveEvent = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3001/api/v1/events/approvedean/${eventID}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //       }
+  //     );
+  //     console.log(response);
+  //     alert("Event Approved Sucessfully..");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const handleApproveEvent = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
+      const resp = await axios.patch(
         `http://localhost:3001/api/v1/events/approvedean/${eventID}`,
         {
-          method: "PATCH",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
+            authorization: bearer,
           },
         }
       );
-      console.log(response);
-      alert("Event Approved Sucessfully..");
+      console.log(resp);
+      toast.success("Event Approved Sucessfully..");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
+  // const handleRejectedEvent = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3001/api/v1/events/approvedean/${eventID}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //         body: {
+  //           message: feedback,
+  //         },
+  //       }
+  //     );
+  //     console.log(response);
+  //     alert("Event Rejected Sucessfully..");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const handleRejectedEvent = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/events/approvedean/${eventID}`,
+      const resp = await axios.patch(
+        `http://localhost:3001/api/v1/events/rejectdean/${eventID}`,
         {
-          method: "DELETE",
+          message: feedback,
+        },
+        {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-          body: {
-            message: feedback,
+            authorization: bearer,
           },
         }
       );
-      console.log(response);
-      alert("Event Rejected Sucessfully..");
+      console.log(resp);
+      toast.success("Event Rejected Sucessfully..");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -478,6 +516,7 @@ const ManageEvents = () => {
                 </div>
               </div>
             </div>
+            <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
           </div>
         </>
       )}

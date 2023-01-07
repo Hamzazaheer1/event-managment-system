@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ImCross } from "react-icons/im";
 import axios from "axios";
 import { FcApproval, FcCancel } from "react-icons/fc";
+import { ToastContainer, toast } from "react-toastify";
 
 const EventsList = () => {
   let jwt;
@@ -55,7 +56,7 @@ const EventsList = () => {
       setSingleEvent(resp.data.data);
     } catch (err) {
       console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -360,6 +361,7 @@ const EventsList = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
     </div>
   );
 };

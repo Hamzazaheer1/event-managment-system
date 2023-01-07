@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { ImCross } from "react-icons/im";
 import axios from "axios";
 import { FcApproval, FcCancel } from "react-icons/fc";
@@ -63,51 +64,46 @@ const ManageEvents = () => {
       console.log("single ", resp.data.data);
     } catch (err) {
       console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
   const handleApproveEvent = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
+      const resp = await axios.patch(
         `http://localhost:3001/api/v1/events/approvepatron/${eventID}`,
         {
-          method: "PATCH",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
+            authorization: bearer,
           },
         }
       );
-      console.log(response);
-      alert("Event Approved Sucessfully..");
+      console.log(resp);
+      toast.success("Event Approved Sucessfully..");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
   const handleRejectedEvent = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/events/delete/${eventID}`,
+      const resp = await axios.patch(
+        `http://localhost:3001/api/v1/events/rejectpatron/${eventID}`,
         {
-          method: "DELETE",
+          message: feedback,
+        },
+        {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-          body: {
-            message: feedback,
+            authorization: bearer,
           },
         }
       );
-      console.log(response);
-
-      alert("Event Rejected Sucessfully..");
+      console.log(resp);
+      toast.success("Event Rejected Sucessfully..");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -483,6 +479,7 @@ const ManageEvents = () => {
                 ></textarea>
               </div>
             </div>
+            <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
           </div>
         </>
       )}

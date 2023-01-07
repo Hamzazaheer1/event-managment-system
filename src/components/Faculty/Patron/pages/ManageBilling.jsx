@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FcApproval, FcCancel } from "react-icons/fc";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 const ManageBilling = () => {
@@ -41,32 +42,38 @@ const ManageBilling = () => {
   const handleRegisterApprove = async (event) => {
     event.preventDefault();
     try {
-      await fetch(`http://localhost:3001/api/v1/register/approve/${eventID}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      });
-      alert("Register request approved");
+      const resp = await axios.patch(
+        `http://localhost:3001/api/v1/register/approve/${eventID}`,
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+      console.log(resp);
+      toast.success("Register request approved");
     } catch (err) {
       console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
   const handleRegisterReject = async (event) => {
     event.preventDefault();
     try {
-      await fetch(`http://localhost:3001/api/v1/register/reject/${eventID}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      });
-      alert("Register request rejected");
+      const resp = await axios.patch(
+        `http://localhost:3001/api/v1/register/reject/${eventID}`,
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+      console.log(resp);
+      toast.success("Register request rejected");
     } catch (err) {
       console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -160,6 +167,7 @@ const ManageBilling = () => {
           </div>
         )}
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
 import { ImCross } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
@@ -63,11 +64,11 @@ const GeneralInfo = () => {
         }
       );
       console.log(resp);
-      alert("Password Updated Sucessfully...");
-      Navigate("/admin-login");
+      toast.success("Password Updated Sucessfully...");
+      Navigate("/");
     } catch (err) {
       console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -158,6 +159,7 @@ const GeneralInfo = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
     </div>
   );
 };
