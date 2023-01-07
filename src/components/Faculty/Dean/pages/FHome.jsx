@@ -23,7 +23,8 @@ const FHome = () => {
             },
           }
         );
-        setResponse(resp.data.data);
+        console.log(resp.data);
+        setResponse(resp.data);
         setError(null);
       } catch (err) {
         setError(err);
@@ -39,27 +40,72 @@ const FHome = () => {
     <div>
       <h1 className="text-center text-2xl font-bold">Dean's Dashboard</h1>
       <h1 className="mb-4 mt-8 text-2xl font-bold">Notifications</h1>
-      <div className="mr-4 2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-50 dark:bg-red-300">
-        <div className="flex items-center">
-          <AiFillNotification className="w-5 h-5 mr-5 text-red-500" />
-          {response && response.length >= 1 ? (
-            <div className="flex flex-col">
-              <h3 className="text-xl font-bold text-red-500 underline animate-pulse">
-                New Notification
-              </h3>
-              <h3 className="text-lg font-medium text-black">
-                Event notification pending. You can view them in{" "}
-                <span className="text-red-500"> Manage Events</span> Section.
-              </h3>
+      <div className="mt-62 xl:border rounded-lg">
+        {response?.FreeEvents.map((item, index) => (
+          <div
+            key={index + 1}
+            className="2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-300 "
+          >
+            <div className="flex items-center">
+              <AiFillNotification className="w-5 h-5 mr-5 text-red-500 ml-1" />
+              {response?.resultfree >= 1 ? (
+                <div className="flex flex-col p-2">
+                  <h3 className="text-xl font-bold text-red-500 animate-pulse">
+                    Event Name:{" "}
+                    <span className="font-bold text-black no-underline">
+                      {item.title}
+                    </span>
+                  </h3>
+                  <h3 className="text-lg font-medium text-black">
+                    Supervisor Name:{" "}
+                    <span className="font-bold">{item.supervisfacname}</span>
+                  </h3>
+                  <h3 className="text-lg font-medium text-black">
+                    Guest Speaker:{" "}
+                    <span className="font-bold">{item.guestspeakrname}</span>
+                  </h3>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
-          ) : (
-            <div className="flex flex-col p-4">
-              <h3 className="text-xl font-bold text-red-900 underline">
-                No New Notification
-              </h3>
+          </div>
+        ))}
+        {response?.resultpaid > 0 ? (
+          <h1 className="mb-4 mt-8 text-2xl font-bold ">New Paid Events</h1>
+        ) : (
+          ""
+        )}
+        {response?.PaidEvents.map((item, index) => (
+          <div
+            key={index}
+            className="2xl:p-4 2xl:ml-96 2xl:mr-5 mb-4 border border-red-300 rounded-lg bg-red-300 "
+          >
+            <div className="flex items-center">
+              <AiFillNotification className="w-5 h-5 mr-5 text-red-500 ml-1" />
+              {response?.resultpaid >= 1 ? (
+                <div className="flex flex-col p-2">
+                  <h3 className="text-xl font-bold text-red-500 animate-pulse">
+                    Event Name:{" "}
+                    <span className="font-bold text-black no-underline">
+                      {item.title}
+                    </span>
+                  </h3>
+                  <h3 className="text-lg font-medium text-black">
+                    Supervisor Name:{" "}
+                    <span className="font-bold">{item.supervisfacname}</span>
+                  </h3>
+                  <h3 className="text-lg font-medium text-black">
+                    Guest Speaker:{" "}
+                    <span className="font-bold">{item.guestspeakrname}</span>
+                  </h3>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

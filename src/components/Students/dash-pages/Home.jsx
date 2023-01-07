@@ -54,7 +54,7 @@ const Home = () => {
     };
 
     apiHandler();
-  }, [bearer]);
+  }, []);
 
   function convertDate(dateString) {
     const date = new Date(dateString);

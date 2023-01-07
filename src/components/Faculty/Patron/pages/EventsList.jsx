@@ -21,7 +21,7 @@ const EventsList = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:3001/api/v1/events/getallevents",
+          "http://localhost:3001/api/v1/events/getalleventsbyfacultyapproved",
           {
             headers: {
               authorization: bearer,
@@ -29,6 +29,7 @@ const EventsList = () => {
           }
         );
 
+        console.log(resp);
         setResponse(resp.data.data);
         setError(null);
       } catch (err) {
