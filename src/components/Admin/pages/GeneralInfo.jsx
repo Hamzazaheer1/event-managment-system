@@ -4,6 +4,7 @@ import axios from "axios";
 import IdCard from "../../images/idCard.png";
 import { ImCross } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const GeneralInfo = () => {
   let jwt;
@@ -19,6 +20,7 @@ const GeneralInfo = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [eventSelector, setEventSelector] = useState(false);
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleClick = () => {
     setEventSelector(!eventSelector);
@@ -63,11 +65,11 @@ const GeneralInfo = () => {
         }
       );
       console.log(resp);
-      alert("Password Updated Sucessfully...");
+      toast.success("Password Updated Sucessfully...");
+      await delay(2000);
       Navigate("/admin-login");
     } catch (err) {
-      console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -158,6 +160,7 @@ const GeneralInfo = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };

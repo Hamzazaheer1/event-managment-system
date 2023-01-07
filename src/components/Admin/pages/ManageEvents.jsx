@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FcApproval, FcCancel } from "react-icons/fc";
+import { ToastContainer, toast } from "react-toastify";
 import { ImCross } from "react-icons/im";
 import axios from "axios";
 import PaidEvents from "./PaidEvents";
@@ -75,9 +76,9 @@ const ManageEvents = () => {
         }
       );
       console.log(response);
-      alert("Event Approved Sucessfully..");
+      toast.success("Event Approved Sucessfully..");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -95,9 +96,9 @@ const ManageEvents = () => {
         }
       );
       console.log(response);
-      alert("Event Rejected Sucessfully..");
+      toast.success("Event Rejected Sucessfully..");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -434,6 +435,7 @@ const ManageEvents = () => {
       )}
 
       {toggle && <PaidEvents />}
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };

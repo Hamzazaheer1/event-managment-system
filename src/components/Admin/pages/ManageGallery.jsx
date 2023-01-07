@@ -284,6 +284,7 @@ const ManageGallery = () => {
           </div>
         )}
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };
