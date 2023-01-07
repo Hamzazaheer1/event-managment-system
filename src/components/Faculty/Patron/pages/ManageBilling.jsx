@@ -82,8 +82,8 @@ const ManageBilling = () => {
       <h1 className="p-5 text-2xl font-bold">Manage Billing Info</h1>
       <div className="grid grid-cols-3">
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 col-span-2">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-red-200 ">
               <tr>
                 <th scope="col" className="py-3 px-6">
                   Event Title
@@ -107,7 +107,7 @@ const ManageBilling = () => {
                 ? response.map((item, index) => (
                     <tr
                       key={index + 1}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer"
+                      className="bg-gray-200 border-b hover:bg-gray-50 cursor-pointer"
                       onClick={() => {
                         handleClick(item.proof, item.student.regno);
                         setEventId(item._id);
@@ -115,7 +115,7 @@ const ManageBilling = () => {
                     >
                       <th
                         scope="row"
-                        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                       >
                         {item.event.title}
                       </th>
@@ -137,14 +137,14 @@ const ManageBilling = () => {
                       <td>
                         <button
                           type="button"
-                          className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                          className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                           onClick={handleRegisterApprove}
                         >
                           Approve
                         </button>
                         <button
                           type="button"
-                          className="ml-1 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                          className="ml-1 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                           onClick={handleRegisterReject}
                         >
                           Reject

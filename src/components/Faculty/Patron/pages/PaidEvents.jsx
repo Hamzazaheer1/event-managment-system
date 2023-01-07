@@ -106,8 +106,8 @@ const PaidEvents = () => {
   return (
     <div className=" bg-gray-100 shadow-lg rounded-lg">
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-red-200">
             <tr>
               <th scope="col" className="py-3 px-6">
                 Title
@@ -137,11 +137,11 @@ const PaidEvents = () => {
               response.map((item, index) => (
                 <tr
                   key={index + 1}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                  className="bg-gray-200 border-b hover:bg-gray-50"
                 >
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
                   >
                     {item.title}
                   </th>
@@ -161,7 +161,7 @@ const PaidEvents = () => {
                   <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
                     <button
                       type="button"
-                      className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                      className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                       onClick={() => {
                         setEventId(item.id);
                         setEventSelector(!eventSelector);
@@ -185,16 +185,16 @@ const PaidEvents = () => {
         }  overflow-y-auto overflow-x-hidden 2xl:fixed right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full grid justify-items-center`}
       >
         <div className="relative p-4 w-full max-w-4xl h-full md:h-auto">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <div className="relative bg-white rounded-lg shadow ">
+            <div className="flex justify-between items-start p-4 rounded-t border-b ">
+              <h3 className="text-xl font-semibold text-gray-900 ">
                 Event Details
               </h3>
               <button
                 onClick={() => {
                   setEventSelector(!eventSelector);
                 }}
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
                 data-modal-toggle="defaultModal"
               >
                 <ImCross />
@@ -433,26 +433,26 @@ const PaidEvents = () => {
               </div>
             )}
 
-            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 ">
               <button
                 type="button"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={handleApproveEvent}
               >
                 Approve
               </button>
               <button
                 type="button"
-                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
                 onClick={handleRejectedEvent}
               >
                 Decline
               </button>
             </div>
-            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 ">
               <textarea
                 rows="4"
-                class="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="flex p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="To decline write your feedback here... and press the decline button above"
                 onChange={(e) => setFeedback(e.target.value)}
               />
