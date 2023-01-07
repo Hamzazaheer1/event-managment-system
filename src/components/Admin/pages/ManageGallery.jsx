@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FcFolder, FcFile } from "react-icons/fc";
+import { ToastContainer, toast } from "react-toastify";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import axios from "axios";
 
@@ -41,25 +42,19 @@ const ManageGallery = () => {
     const formData = new FormData();
     formData.append("photo", photo);
     try {
-      const response = await fetch(
+      const resp = await axios.patch(
         `http://localhost:3001/api/v1/gallery/uploadtofolder/${folderId}`,
+        formData,
         {
-          method: "PATCH",
           headers: {
-            Authorization: bearer,
+            authorization: bearer,
           },
-          body: formData,
         }
       );
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        alert(responseData.message);
-        throw new Error(responseData.message);
-      }
-      alert("Photo Uploaded Sucessfully");
+      console.log(resp);
+      toast.success("Photo Uploaded Sucessfully...");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -69,41 +64,31 @@ const ManageGallery = () => {
     formData.append("photo", photo);
     formData.append("foldername", foldername);
     try {
-      const response = await fetch(
+      const resp = await axios.post(
         "http://localhost:3001/api/v1/gallery/create",
+        formData,
         {
-          method: "POST",
           headers: {
-            Authorization: bearer,
+            authorization: bearer,
           },
-          body: formData,
         }
       );
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        alert(responseData.message);
-        throw new Error(responseData.message);
-      }
-      alert("Photo Uploaded Sucessfully");
+      console.log(resp);
+      toast.success("Photo Uploaded Sucessfully...");
     } catch (err) {
-      console.log(err.response.data.message);
+      toast.error(err.response.data.message);
     }
   };
 
   const handleGetFolderById = async (id) => {
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/v1/gallery/folder/${id}`,
-        {
-          method: "GET",
-        }
+      const resp = await axios.get(
+        `http://localhost:3001/api/v1/gallery/folder/${id}`
       );
-
-      const data = await response.json();
-      setSingleFolderData(data.data?.photo);
+      setSingleFolderData(resp.data.data.photo);
+      console.log(resp.data.data.photo);
     } catch (err) {
-      console.log(err.response.data.message);
+      toast.error(err.response.data.message);
     }
   };
 

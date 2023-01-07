@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
 
@@ -27,9 +28,9 @@ const VerifyStudents = () => {
         }
       );
       console.log(resp);
-      alert("Student Verified Sucessfully...");
+      toast.success("Student Verified Sucessfully...");
     } catch (err) {
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -55,8 +56,6 @@ const VerifyStudents = () => {
 
     apiHandler();
   }, [bearer, error]);
-
-  // console.log(response);
 
   const handleClick = (photo, name) => {
     setPhoto(photo);
@@ -183,6 +182,7 @@ const VerifyStudents = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
     </div>
   );
 };

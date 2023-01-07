@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 const ManageSocietyNames = () => {
@@ -66,10 +66,10 @@ const ManageSocietyNames = () => {
       );
 
       console.log(resp);
-      alert("Society added Sucessfully...");
+      toast.success("Society added Sucessfully...");
     } catch (err) {
       console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -84,10 +84,9 @@ const ManageSocietyNames = () => {
         }
       );
       console.log(resp);
-      alert("Society Deleted Sucessfully...");
+      toast.success("Society Deleted Sucessfully...");
     } catch (err) {
-      console.log(err);
-      alert("Error...");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -124,10 +123,9 @@ const ManageSocietyNames = () => {
           },
         }
       );
-
-      alert("Patron assigned sucessfully...");
+      toast.success("Patron assigned sucessfully...");
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -334,6 +332,7 @@ const ManageSocietyNames = () => {
           </table>
         </div>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };

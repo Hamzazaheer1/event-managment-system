@@ -62,40 +62,73 @@ const ManageEvents = () => {
     }
   };
 
-  const handleApproveEvent = async (event) => {
-    event.preventDefault();
+  // const handleApproveEvent = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3001/api/v1/events/approveadmin/${eventID}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //       }
+  //     );
+  //     console.log(response);
+  //     toast.success("Event Approved Sucessfully..");
+  //   } catch (err) {
+  //     toast.error(err.response.data.message);
+  //   }
+  // };
+  const handleApproveEvent = async () => {
     try {
-      const response = await fetch(
+      const resp = await axios.patch(
         `http://localhost:3001/api/v1/events/approveadmin/${eventID}`,
         {
-          method: "PATCH",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
+            authorization: bearer,
           },
         }
       );
-      console.log(response);
+      console.log(resp);
       toast.success("Event Approved Sucessfully..");
     } catch (err) {
       toast.error(err.response.data.message);
     }
   };
 
-  const handleRejectedEvent = async (event) => {
-    event.preventDefault();
+  // const handleRejectedEvent = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3001/api/v1/events/delete/${eventID}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //       }
+  //     );
+  //     console.log(response);
+  //     toast.success("Event Rejected Sucessfully..");
+  //   } catch (err) {
+  //     toast.error(err.response.data.message);
+  //   }
+  // };
+
+  const handleRejectedEvent = async () => {
     try {
-      const response = await fetch(
+      const resp = await axios.delete(
         `http://localhost:3001/api/v1/events/delete/${eventID}`,
         {
-          method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
+            authorization: bearer,
           },
         }
       );
-      console.log(response);
+      console.log(resp);
       toast.success("Event Rejected Sucessfully..");
     } catch (err) {
       toast.error(err.response.data.message);
@@ -430,12 +463,12 @@ const ManageEvents = () => {
                 </div>
               </div>
             </div>
+            <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
           </div>
         </>
       )}
 
       {toggle && <PaidEvents />}
-      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };

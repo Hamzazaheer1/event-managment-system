@@ -10,7 +10,6 @@ const AHome = () => {
 
   const bearer = "Bearer " + jwt;
   const [response, setResponse] = useState();
-  const [error, setError] = useState();
 
   useEffect(() => {
     const apiHandler = async () => {
@@ -25,16 +24,13 @@ const AHome = () => {
         );
         setResponse(resp.data);
         console.log(resp.data);
-        setError(null);
       } catch (err) {
-        setError(err);
-        console.log(error);
-        setResponse(null);
+        console.log(err);
       }
     };
 
     apiHandler();
-  }, [bearer, error]);
+  }, [bearer]);
 
   return (
     <div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import axios from "axios";
 
@@ -62,15 +63,12 @@ const RegisterFaculty = () => {
         }
       );
       setResponse(resp);
-      setError(null);
       await delay(3000);
       setResponse(null);
+      toast.success("Faculty user registered Successfully");
     } catch (err) {
-      console.log(err);
-      setError(err);
-      setResponse(null);
+      toast.error(err.response.data.message);
       await delay(3000);
-      setError(null);
       // errRef.current.focus();
     }
   };
@@ -269,6 +267,7 @@ const RegisterFaculty = () => {
           ""
         )}
       </form>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
     </div>
   );
 };
