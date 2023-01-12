@@ -4,13 +4,15 @@ import axios from "axios";
 import { FcApproval, FcCancel } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import AllApprovedPaidEvents from "./AllApprovedPaidEvents";
+import { useNavigate } from "react-router-dom";
+import Report from "../../../Shared/Report";
 
 const EventsList = () => {
   let jwt;
   if (localStorage.Patron) {
     jwt = localStorage.getItem("Patron");
   }
-
+  const Navigate = useNavigate();
   const bearer = "Bearer " + jwt;
   const [response, setResponse] = useState();
   const [error, setError] = useState();
@@ -59,6 +61,10 @@ const EventsList = () => {
       console.log(err);
       toast.error(err.response.data.message);
     }
+  };
+
+  const handlePrint = () => {
+    Navigate(`/report/${eventID}`);
   };
 
   return (
@@ -390,6 +396,9 @@ const EventsList = () => {
                   <button
                     type="button"
                     className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    onClick={() => {
+                      handlePrint();
+                    }}
                   >
                     Generate Report
                   </button>

@@ -14,6 +14,7 @@ import DeanDashboard from "./components/Faculty/Dean/DeanDashboard";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import PageNotFound from "./components/Shared/PageNotFound";
 import Protected from "./components/Utils/Protected";
+import Report from "./components/Shared/Report";
 
 function App() {
   // const [user, setUser] = useState();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/forgetpass" element={<ForgetPassword />} />
         <Route path="/changepassword/:token" element={<ChangePassword />} />
+        <Route path="/report/:id" element={<Report />} />
 
         {/* {user === "student" && (
           

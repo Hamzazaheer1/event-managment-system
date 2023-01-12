@@ -3,6 +3,7 @@ import { ImCross } from "react-icons/im";
 import axios from "axios";
 import { FcApproval, FcCancel } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AllApprovedPaidEvents = () => {
   let jwt;
@@ -10,6 +11,7 @@ const AllApprovedPaidEvents = () => {
     jwt = localStorage.getItem("Patron");
   }
 
+  const Navigate = useNavigate();
   const bearer = "Bearer " + jwt;
   const [response, setResponse] = useState();
   const [error, setError] = useState();
@@ -58,6 +60,10 @@ const AllApprovedPaidEvents = () => {
       console.log(err);
       toast.error(err.response.data.message);
     }
+  };
+
+  const handlePrint = () => {
+    Navigate(`/report/${eventID}`);
   };
 
   return (
@@ -353,6 +359,7 @@ const AllApprovedPaidEvents = () => {
               <button
                 type="button"
                 className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                onClick={handlePrint}
               >
                 Generate Report
               </button>
