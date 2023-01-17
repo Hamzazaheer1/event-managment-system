@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import SDashboard from "./components/Students/SDashboard";
 import LoginDash from "./components/Authentication/LoginDash";
@@ -17,22 +17,6 @@ import Protected from "./components/Utils/Protected";
 import Report from "./components/Shared/Report";
 
 function App() {
-  // const [user, setUser] = useState();
-
-  // useEffect(() => {
-  //   if (localStorage.Student) {
-  //     setUser("student");
-  //   } else if (localStorage.admin) {
-  //     setUser("admin");
-  //   } else if (localStorage.Patron) {
-  //     setUser("Patron");
-  //   } else if (localStorage.HOD) {
-  //     setUser("HOD");
-  //   } else if (localStorage.Dean) {
-  //     setUser("Dean");
-  //   }
-  // }, [user]);
-
   return (
     <React.Fragment>
       <Routes>
@@ -45,40 +29,45 @@ function App() {
         <Route path="/changepassword/:token" element={<ChangePassword />} />
         <Route path="/report/:id" element={<Report />} />
 
-        {/* {user === "student" && (
-          
-        )} */}
         <Route
           path="/student-dashboard"
-          element={<Protected Component={SDashboard} />}
+          element={
+            <Protected>
+              <SDashboard />
+            </Protected>
+          }
         />
-        {/* {user === "Patron" && (
-         
-        )} */}
         <Route
           path="/patron-dashboard"
-          element={<Protected Component={PDashboard} />}
+          element={
+            <Protected>
+              <PDashboard />
+            </Protected>
+          }
         />
         <Route
           path="/hod-dashboard"
-          element={<Protected Component={HodDashboard} />}
+          element={
+            <Protected>
+              <HodDashboard />
+            </Protected>
+          }
         />
-        {/* {user === "HOD" && (
-          
-        )} */}
-        {/* {user === "Dean" && (
-          
-        )} */}
         <Route
           path="/dean-dashboard"
-          element={<Protected Component={DeanDashboard} />}
+          element={
+            <Protected>
+              <DeanDashboard />
+            </Protected>
+          }
         />
-        {/* {user === "admin" && (
-         
-        )} */}
         <Route
           path="/admin-dashboard"
-          element={<Protected Component={AdminDashboard} />}
+          element={
+            <Protected>
+              <AdminDashboard />
+            </Protected>
+          }
         />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
