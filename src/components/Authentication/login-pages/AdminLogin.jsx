@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { FaGraduationCap, FaInfoCircle } from "react-icons/fa";
 import custLogo from "../../images/custlogo_white.png";
 import axios from "axios";
+import background from "../../images/background.png";
 
 const USER_REGEX = /^[A-z]*\.[a-z]*$/;
 const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
@@ -91,7 +92,12 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="bg-[url(https://custonline.com/public/lib/img/login.jpg)] bg-cover w-screen h-screen ">
+    <div
+      className="bg-cover bg-no-repeat bg-center w-full h-screen "
+      style={{
+        backgroundImage: `url(${background})`,
+      }}
+    >
       <div className="p-5">
         <img src={custLogo} alt="custlogo" className="w-32 ml-8 " />
         <h5 className="text-white text-l">Capital Management System</h5>
