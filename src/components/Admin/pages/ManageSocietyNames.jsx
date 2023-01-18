@@ -25,27 +25,27 @@ const ManageSocietyNames = () => {
     setAddEvent(!addEvent);
   };
 
-  useEffect(() => {
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get(
-          "http://localhost:3001/api/v1/societyandtypes/allsocites",
-          {
-            headers: {
-              authorization: bearer,
-            },
-          }
-        );
-        console.log("society types ", resp.data.data);
-        setResponse(resp.data.data);
-        setError(null);
-      } catch (err) {
-        setError(err);
-        setResponse(null);
-        console.log(error);
-      }
-    };
+  const apiHandler = async () => {
+    try {
+      const resp = await axios.get(
+        "http://localhost:3001/api/v1/societyandtypes/allsocites",
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+      console.log("society types ", resp.data.data);
+      setResponse(resp.data.data);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      setResponse(null);
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     apiHandler();
   }, [bearer, error]);
 
@@ -67,6 +67,7 @@ const ManageSocietyNames = () => {
 
       console.log(resp);
       toast.success("Society added Sucessfully...");
+      await apiHandler();
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message);
@@ -85,6 +86,7 @@ const ManageSocietyNames = () => {
       );
       console.log(resp);
       toast.success("Society Deleted Sucessfully...");
+      await apiHandler();
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -124,6 +126,7 @@ const ManageSocietyNames = () => {
         }
       );
       toast.success("Patron assigned sucessfully...");
+      await apiHandler();
     } catch (err) {
       toast.error(err.response.data.message);
     }

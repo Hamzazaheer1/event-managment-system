@@ -21,19 +21,19 @@ const ManageGallery = () => {
   const [singleFolderData, setSingleFolderData] = useState();
   const [folderId, setFolderId] = useState("");
 
-  useEffect(() => {
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get("http://localhost:3001/api/v1/gallery/");
-        setResponse(resp.data.data);
-        setError(null);
-      } catch (err) {
-        console.log(error);
-        setError(err);
-        setResponse(null);
-      }
-    };
+  const apiHandler = async () => {
+    try {
+      const resp = await axios.get("http://localhost:3001/api/v1/gallery/");
+      setResponse(resp.data.data);
+      setError(null);
+    } catch (err) {
+      console.log(error);
+      setError(err);
+      setResponse(null);
+    }
+  };
 
+  useEffect(() => {
     apiHandler();
   }, [error]);
 
@@ -53,6 +53,8 @@ const ManageGallery = () => {
       );
       console.log(resp);
       toast.success("Photo Uploaded Sucessfully...");
+
+      await apiHandler();
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -75,6 +77,7 @@ const ManageGallery = () => {
       );
       console.log(resp);
       toast.success("Photo Uploaded Sucessfully...");
+      await apiHandler();
     } catch (err) {
       toast.error(err.response.data.message);
     }
