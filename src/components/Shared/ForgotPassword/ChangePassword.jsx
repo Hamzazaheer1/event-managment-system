@@ -2,8 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import custLogo from "../../images/custlogo_white.png";
+import background from "../../images/background.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { FaGraduationCap, FaInfoCircle } from "react-icons/fa";
 
 const StudentLogin = () => {
   const Navigate = useNavigate();
@@ -37,46 +39,46 @@ const StudentLogin = () => {
   };
 
   return (
-    <div className="bg-[url(https://custonline.com/public/lib/img/login.jpg)] bg-cover w-screen h-screen">
+    <div
+      className="bg-cover bg-no-repeat bg-center w-full h-screen"
+      style={{
+        backgroundImage: `url(${background})`,
+      }}
+    >
       <div className="p-5">
         <img src={custLogo} alt="custlogo" className="w-32 ml-8" />
         <h5 className="text-white text-l">Capital Management System</h5>
       </div>
       <div className="grid justify-items-center items-center">
-        <form className="bg-white mt-10 w-80  2xl:w-96 p-5 2xl:mt-0 rounded ">
-          <div className="block p-3 max-w-sm bg-red-500 rounded shadow-md -mt-[3rem] mb-6">
+        <form className="bg-black/70 mt-10 2xl:w-[60rem] p-5 2xl:mt-0 rounded">
+          <div className="block p-3 max-w-sm shadow-md w-full ml-auto mr-auto">
             <h2 className=" text-gradiant-to-r from text-white  rounded flex justify-center text-2xl font-bold">
-              Change Password
+              <span className="mt-1 text-red-500 text-2xl">
+                <FaGraduationCap />
+              </span>
+              CUST <span className="text-red-500 pl-2">EMS</span>
             </h2>
           </div>
+          <br />
+          <h2 className=" text-gradiant-to-r from text-white/75  rounded flex justify-center text-2xl font-bold pb-3 ">
+            Change Password
+          </h2>
 
-          <div className="mb-5">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Password
-            </label>
+          <div className="mb-5 mt-5">
             <input
               type="password"
               id="password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+              className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
               placeholder="password"
               required
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Confirm password
-            </label>
             <input
               type="password"
               id="password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+              className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
               placeholder="confirm password"
               required
               onChange={(e) => setPasswordConfirm(e.target.value)}

@@ -9,7 +9,7 @@ import axios from "axios";
 import background from "../../images/background.png";
 
 const USER_REGEX = /^[A-z]*\.[a-z]*$/;
-const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
+const PWD_REGEX = /^(?=.*[0-9])(?=.{8,})/;
 
 const AdminLogin = () => {
   const Navigate = useNavigate();
@@ -100,9 +100,9 @@ const AdminLogin = () => {
     >
       <div className="p-5">
         <img src={custLogo} alt="custlogo" className="w-32 ml-8 " />
-        <h5 className="text-white text-l">Capital Management System</h5>
+        <h5 className="text-white text-lg">Capital Management System</h5>
       </div>
-      <div className="grid justify-items-center items-center  ]">
+      <div className="grid justify-items-center items-center ">
         <form className="bg-black/70 mt-10 2xl:w-[60rem] p-5 2xl:mt-0 rounded">
           <div className="block p-3 max-w-sm shadow-md w-full ml-auto mr-auto">
             <h2 className=" text-gradiant-to-r from text-white  rounded flex justify-center text-2xl font-bold">
