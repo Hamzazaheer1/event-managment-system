@@ -25,28 +25,27 @@ const ManageEvents = () => {
   //   const date = new Date(dateString);
   //   return date.toLocaleString();
   // }
+  const apiHandler = async () => {
+    try {
+      const resp = await axios.get(
+        "http://localhost:3001/api/v1/events/pendingHOD",
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+
+      setResponse(resp.data.FreeEvents);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      setResponse(null);
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get(
-          "http://localhost:3001/api/v1/events/pendingHOD",
-          {
-            headers: {
-              authorization: bearer,
-            },
-          }
-        );
-
-        setResponse(resp.data.FreeEvents);
-        setError(null);
-      } catch (err) {
-        setError(err);
-        setResponse(null);
-        console.log(error);
-      }
-    };
-
     apiHandler();
   }, [bearer, error]);
 
@@ -67,21 +66,43 @@ const ManageEvents = () => {
     }
   };
 
+  // const handleApproveEvent = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const resp = await axios.patch(
+  //       `http://localhost:3001/api/v1/events/approvehod/${eventID}`,
+  //       {
+  //         headers: {
+  //           authorization: bearer,
+  //         },
+  //       }
+  //     );
+  //     console.log(resp);
+  //     toast.success("Event Approved Sucessfully..");
+  //   } catch (err) {
+  //     toast.error(err.response.data.message);
+  //   }
+  // };
+
   const handleApproveEvent = async (event) => {
     event.preventDefault();
     try {
-      const resp = await axios.patch(
+      const response = await fetch(
         `http://localhost:3001/api/v1/events/approvehod/${eventID}`,
         {
+          method: "PATCH",
           headers: {
-            authorization: bearer,
+            "Content-Type": "application/json",
+            Authorization: bearer,
           },
         }
       );
-      console.log(resp);
-      toast.success("Event Approved Sucessfully..");
+      if (response.ok) {
+        toast.success("Event Approved Sucessfully..");
+        await apiHandler();
+      }
     } catch (err) {
-      toast.error(err.response.data.message);
+      alert(err);
     }
   };
 

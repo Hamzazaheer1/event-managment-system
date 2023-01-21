@@ -25,26 +25,26 @@ const ManageEvents = () => {
   //   return date.toLocaleString();
   // }
 
-  useEffect(() => {
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get(
-          "http://localhost:3001/api/v1/events/pendingDean",
-          {
-            headers: {
-              authorization: bearer,
-            },
-          }
-        );
-        setResponse(resp.data.FreeEvents);
-        setError(null);
-      } catch (err) {
-        setError(err);
-        setResponse(null);
-        console.log(error);
-      }
-    };
+  const apiHandler = async () => {
+    try {
+      const resp = await axios.get(
+        "http://localhost:3001/api/v1/events/pendingDean",
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+      setResponse(resp.data.FreeEvents);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      setResponse(null);
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     apiHandler();
   }, [bearer, error]);
 
@@ -68,62 +68,43 @@ const ManageEvents = () => {
   // const handleApproveEvent = async (event) => {
   //   event.preventDefault();
   //   try {
-  //     const response = await fetch(
+  //     const resp = await axios.patch(
   //       `http://localhost:3001/api/v1/events/approvedean/${eventID}`,
   //       {
-  //         method: "PATCH",
   //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: bearer,
+  //           authorization: bearer,
   //         },
   //       }
   //     );
-  //     console.log(response);
-  //     alert("Event Approved Sucessfully..");
+  //     console.log(resp);
+  //     toast.success("Event Approved Sucessfully..");
   //   } catch (err) {
-  //     console.log(err);
+  //     toast.error(err.response.data.message);
   //   }
   // };
+
   const handleApproveEvent = async (event) => {
     event.preventDefault();
     try {
-      const resp = await axios.patch(
+      const response = await fetch(
         `http://localhost:3001/api/v1/events/approvedean/${eventID}`,
         {
+          method: "PATCH",
           headers: {
-            authorization: bearer,
+            "Content-Type": "application/json",
+            Authorization: bearer,
           },
         }
       );
-      console.log(resp);
-      toast.success("Event Approved Sucessfully..");
+      if (response.ok) {
+        toast.success("Event Approved Sucessfully..");
+        await apiHandler();
+      }
     } catch (err) {
-      toast.error(err.response.data.message);
+      alert(err);
     }
   };
 
-  // const handleRejectedEvent = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:3001/api/v1/events/approvedean/${eventID}`,
-  //       {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: bearer,
-  //         },
-  //         body: {
-  //           message: feedback,
-  //         },
-  //       }
-  //     );
-  //     console.log(response);
-  //     alert("Event Rejected Sucessfully..");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   const handleRejectedEvent = async (event) => {
     event.preventDefault();
     try {

@@ -9,9 +9,9 @@ import axios from "axios";
 import background from "../../images/background.png";
 
 const USER_REGEX = /^[A-z]*\.[a-z]*$/;
-// const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
-const PWD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
+// const PWD_REGEX =
+//   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
 const FacultyLogin = () => {
   const Navigate = useNavigate();
@@ -91,8 +91,9 @@ const FacultyLogin = () => {
         "http://localhost:3001/api/v1/users/login",
         { user, password: pwd }
       );
-
+      console.log(resp);
       if (resp.data.data.role === "Patron") {
+        console.log(resp.data.token);
         localStorage.setItem("Patron", resp.data.token);
         toast.success("Login successfull");
         await delay(2000);

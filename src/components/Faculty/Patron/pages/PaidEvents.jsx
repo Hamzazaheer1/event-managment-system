@@ -23,28 +23,26 @@ const PaidEvents = () => {
     return date.toLocaleString();
   }
 
+  const apiHandler = async () => {
+    try {
+      const resp = await axios.get(
+        "http://localhost:3001/api/v1/events/pendingpatron",
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+
+      setResponse(resp.data.PaidEvents);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get(
-          "http://localhost:3001/api/v1/events/pendingpatron",
-          {
-            headers: {
-              authorization: bearer,
-            },
-          }
-        );
-
-        setResponse(resp.data.PaidEvents);
-        // console.log(resp.data.PaidEvents);
-        setError(null);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
     apiHandler();
-  }, [bearer, response]);
+  }, [bearer]);
 
   const handleSingleEvent = async () => {
     try {
@@ -64,21 +62,44 @@ const PaidEvents = () => {
     }
   };
 
+  // const handleApproveEvent = async (e) => {
+  //   e.preventDefault();
+  //   console.log(bearer);
+  //   try {
+  //     const resp = await axios.patch(
+  //       `http://localhost:3001/api/v1/events/approvepatron/${eventID}`,
+  //       {
+  //         headers: {
+  //           authorization: bearer,
+  //         },
+  //       }
+  //     );
+  //     console.log(resp);
+  //     toast.success("Event Approved Sucessfully..");
+  //   } catch (err) {
+  //     toast.error(err.response.data.message);
+  //   }
+  // };
+
   const handleApproveEvent = async (event) => {
     event.preventDefault();
     try {
-      const resp = await axios.patch(
+      const response = await fetch(
         `http://localhost:3001/api/v1/events/approvepatron/${eventID}`,
         {
+          method: "PATCH",
           headers: {
-            authorization: bearer,
+            "Content-Type": "application/json",
+            Authorization: bearer,
           },
         }
       );
-      console.log(resp);
-      toast.success("Event Approved Sucessfully..");
+      if (response.ok) {
+        toast.success("Event Approved Sucessfully..");
+        await apiHandler();
+      }
     } catch (err) {
-      toast.error(err.response.data.message);
+      alert(err);
     }
   };
 
