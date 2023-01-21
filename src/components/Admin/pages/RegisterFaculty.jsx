@@ -22,6 +22,7 @@ const RegisterFaculty = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setpasswordConfirm] = useState("");
   const [role, setRole] = useState("");
+  const [department, setDepartment] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [validCPwd, setValidCPwd] = useState(false);
   const [validMatch, setValidMatch] = useState(false);
@@ -55,6 +56,7 @@ const RegisterFaculty = () => {
           password,
           passwordConfirm,
           role,
+          department,
         },
         {
           headers: {
@@ -216,23 +218,52 @@ const RegisterFaculty = () => {
             onChange={(e) => setpasswordConfirm(e.target.value)}
           />
         </div>
-        <div className="mb-6">
-          <label
-            className="block mb-2 text-sm font-medium text-gray-900 "
-            htmlFor="file_input"
-          >
-            Role
-          </label>
-          <select
-            name="dropdown"
-            id="dropdown"
-            className="cursor-pointer w-32 h-10 bg-red-500 text-white p-1 font-bold rounded"
-            onClick={(e) => setRole(e.target.value)}
-          >
-            <option value="Patron">Patron</option>
-            <option value="HOD">HOD</option>
-            <option value="Dean">Dean</option>
-          </select>
+        <div className="flex gap-10">
+          <div className="mb-6">
+            <label
+              className="block mb-2 text-sm font-medium text-gray-900 "
+              htmlFor="file_input"
+            >
+              Role
+            </label>
+            <select
+              name="dropdown"
+              id="dropdown"
+              className="cursor-pointer w-32 h-10 bg-red-500 text-white p-1 font-bold rounded"
+              onClick={(e) => setRole(e.target.value)}
+            >
+              <option value="Patron">Patron</option>
+              <option value="HOD">HOD</option>
+              <option value="Dean">Dean</option>
+            </select>
+          </div>
+          <div className="mb-6">
+            <label
+              className="block mb-2 text-sm font-medium text-gray-900 "
+              htmlFor="file_input"
+            >
+              Department
+            </label>
+            <select
+              name="dropdown"
+              id="dropdown"
+              className="cursor-pointer w-32 h-10 bg-red-500 text-white p-1 font-bold rounded"
+              onClick={(e) => setDepartment(e.target.value)}
+            >
+              <option value="BBA">BBA</option>
+              <option value="SE">SE</option>
+              <option value="Psychology">Psychology</option>
+              <option value="EE">EE</option>
+              <option value="CE">CE</option>
+              <option value="ME">ME</option>
+              <option value="Biosciences">Biosciences</option>
+              <option value="Biotechnology">Biotechnology</option>
+              <option value="Microbiology">Microbiology</option>
+              <option value="AF">AF</option>
+              <option value="Pharm.D">Pharm.D</option>
+              <option value="None">None</option>
+            </select>
+          </div>
         </div>
 
         <button

@@ -11,6 +11,8 @@ import background from "../../images/background.png";
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 const PWD_REGEX = /^(?=.*[0-9])(?=.{8,})/;
+const NAME_REGEX = /^[a-zA-Z]{3,}$/;
+const REG_REGEX = /^[a-zA-Z0-9]+$/;
 
 const Signup = () => {
   const Navigate = useNavigate();
@@ -19,13 +21,18 @@ const Signup = () => {
 
   const [response, setResponse] = useState();
   const [error, setError] = useState();
+
   const [name, setName] = useState("");
+  const [validName, setValidName] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
 
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [regno, setRegno] = useState("");
+  const [validRegno, setValidRegno] = useState(false);
+  const [regnoFocus, setRegnoFocus] = useState(false);
 
   const [password, setPassword] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -46,6 +53,14 @@ const Signup = () => {
   }, []);
 
   useEffect(() => {
+    setValidName(NAME_REGEX.test(name));
+  }, [name]);
+
+  useEffect(() => {
+    setValidRegno(REG_REGEX.test(regno));
+  }, [regno]);
+
+  useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
   }, [email]);
 
@@ -56,7 +71,7 @@ const Signup = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [email, password, passwordConfirm]);
+  }, [name, email, password, passwordConfirm]);
 
   const signupHandler = async (event) => {
     event.preventDefault();
@@ -230,26 +245,83 @@ const Signup = () => {
           </div>
           <div class="grid md:grid-cols-2 md:gap-6">
             <div class="relative z-0 w-full mb-6 group">
-              <input
-                type="text"
-                name="floating_first_name"
-                id="floating_first_name"
-                className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
-                placeholder="full name"
-                required
-                onChange={(e) => setName(e.target.value)}
-              />
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  name="floating_first_name"
+                  placeholder="full name"
+                  onChange={(e) => setName(e.target.value)}
+                  id="name"
+                  autoComplete="off"
+                  value={name}
+                  className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
+                  required
+                  aria-invalid={validName ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setNameFocus(true)}
+                  onBlur={() => setNameFocus(false)}
+                />
+                <FaCheck
+                  className={validName ? "text-green-500 text-xl" : "hidden"}
+                />
+                <FaTimes
+                  className={
+                    validName || !name ? "hidden" : "text-red-500 text-xl"
+                  }
+                />
+              </div>
+              <p
+                id="name"
+                className={
+                  nameFocus && !validName
+                    ? "text-[0.75rem] bg-black text-white p-2 relative -bottom-[10px] w-max rounded-md"
+                    : "absolute -left-[9999px]"
+                }
+              >
+                <span className="flex gap-2 items-center -mb-4">
+                  <FaInfoCircle /> Name should only contains alphabets.
+                </span>
+              </p>
             </div>
             <div class="relative z-0 w-full mb-6 group">
-              <input
-                type="text"
-                name="regno"
-                id="regno"
-                className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5"
-                placeholder="registration no"
-                required
-                onChange={(e) => setRegno(e.target.value)}
-              />
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  name="regno"
+                  id="regno"
+                  className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5"
+                  placeholder="registration no"
+                  required
+                  onChange={(e) => setRegno(e.target.value)}
+                  autoComplete="off"
+                  value={regno}
+                  aria-invalid={validRegno ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setRegnoFocus(true)}
+                  onBlur={() => setRegnoFocus(false)}
+                />
+                <FaCheck
+                  className={validRegno ? "text-green-500 text-xl" : "hidden"}
+                />
+                <FaTimes
+                  className={
+                    validRegno || !regno ? "hidden" : "text-red-500 text-xl"
+                  }
+                />
+              </div>
+              <p
+                id="name"
+                className={
+                  regnoFocus && !validRegno
+                    ? "text-[0.75rem] bg-black text-white p-2 relative -bottom-[10px] w-max rounded-md"
+                    : "absolute -left-[9999px]"
+                }
+              >
+                <span className="flex gap-2 items-center -mb-4">
+                  <FaInfoCircle /> Reg no should oncly contains alphabets &
+                  numbers.
+                </span>
+              </p>
             </div>
           </div>
           <div class="grid md:grid-cols-2 md:gap-6">
