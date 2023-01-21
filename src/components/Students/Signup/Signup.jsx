@@ -42,6 +42,8 @@ const Signup = () => {
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
+  const [department, setDepartment] = useState("");
+
   const [photo, setPhoto] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -83,6 +85,7 @@ const Signup = () => {
     formData.append("password", password);
     formData.append("passwordConfirm", passwordConfirm);
     formData.append("photo", photo);
+    formData.append("department", department);
 
     try {
       const resp = await axios.post(
@@ -91,9 +94,9 @@ const Signup = () => {
       );
       setResponse(resp);
       setError(null);
-      await delay(1000);
       setIsLoading(false);
       toast.success("User Registered. Please wait till you get verified");
+      await delay(1000);
       Navigate("/std-login");
     } catch (err) {
       console.log(err.response.data.message);
@@ -334,6 +337,27 @@ const Signup = () => {
                 required
                 onChange={(e) => setPhoto(e.target.files[0])}
               />
+            </div>
+            <div className="mb-6">
+              <select
+                name="dropdown"
+                id="dropdown"
+                className="bg-gray-50/25 text-black text-sm font-semibold rounded-lg w-full p-2.5 "
+                onClick={(e) => setDepartment(e.target.value)}
+              >
+                <option value="BBA">BBA</option>
+                <option value="SE">SE</option>
+                <option value="Psychology">Psychology</option>
+                <option value="EE">EE</option>
+                <option value="CE">CE</option>
+                <option value="ME">ME</option>
+                <option value="Biosciences">Biosciences</option>
+                <option value="Biotechnology">Biotechnology</option>
+                <option value="Microbiology">Microbiology</option>
+                <option value="AF">AF</option>
+                <option value="Pharm.D">Pharm.D</option>
+                <option value="None">None</option>
+              </select>
             </div>
           </div>
           <button
