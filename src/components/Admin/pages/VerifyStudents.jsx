@@ -17,6 +17,25 @@ const VerifyStudents = () => {
   const [response, setResponse] = useState();
   const [error, setError] = useState();
 
+  const apiHandler = async () => {
+    try {
+      const resp = await axios.get(
+        "http://localhost:3001/api/v1/users/unverifiedstudents",
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+      setResponse(resp.data.data);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      setResponse(null);
+      console.log(error);
+    }
+  };
+
   const handleStudentVerify = async (id) => {
     try {
       const resp = await axios.get(
@@ -29,31 +48,31 @@ const VerifyStudents = () => {
       );
       console.log(resp);
       toast.success("Student Verified Sucessfully...");
+      await apiHandler();
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  };
+
+  const handleStudentDecline = async (id) => {
+    try {
+      const resp = await axios.get(
+        `http://localhost:3001/api/v1/users/studentdecline/${id}`,
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+      console.log(resp);
+      toast.success("Student Declined Sucessfully...");
+      await apiHandler();
     } catch (err) {
       toast.error(err.response.data.message);
     }
   };
 
   useEffect(() => {
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get(
-          "http://localhost:3001/api/v1/users/unverifiedstudents",
-          {
-            headers: {
-              authorization: bearer,
-            },
-          }
-        );
-        setResponse(resp.data.data);
-        setError(null);
-      } catch (err) {
-        setError(err);
-        setResponse(null);
-        console.log(error);
-      }
-    };
-
     apiHandler();
   }, [bearer, error]);
 
@@ -121,17 +140,24 @@ const VerifyStudents = () => {
                     <td className="py-4 px-6">{item.name}</td>
                     <td className="py-4 px-6">{item.email}</td>
                     <td className="py-4 px-6">{item.role}</td>
-                    <td
-                      className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200"
-                      onClick={() => {
-                        handleStudentVerify(item._id);
-                      }}
-                    >
+                    <td className="py-4 px-6 flex cursor-pointer gap-4">
+                      <button
+                        type="button"
+                        className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                        onClick={() => {
+                          handleStudentVerify(item._id);
+                        }}
+                      >
+                        Verify
+                      </button>
                       <button
                         type="button"
                         className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                        onClick={() => {
+                          handleStudentDecline(item._id);
+                        }}
                       >
-                        Verify
+                        Decline
                       </button>
                     </td>
                   </tr>

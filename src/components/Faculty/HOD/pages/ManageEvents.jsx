@@ -136,7 +136,7 @@ const ManageEvents = () => {
                 setToggle(false);
               }}
             >
-              Simple Events
+              Unpaid Events
             </span>
           </li>
         </ul>
