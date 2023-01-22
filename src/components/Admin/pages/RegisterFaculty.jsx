@@ -270,6 +270,7 @@ const RegisterFaculty = () => {
           type="submit"
           className="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           onClick={signupHandler}
+          disabled={!validPwd || !validMatch || !validUName}
         >
           Register
         </button>

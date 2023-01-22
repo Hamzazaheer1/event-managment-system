@@ -346,6 +346,7 @@ const Signup = () => {
                 onClick={(e) => setDepartment(e.target.value)}
               >
                 <option value="BBA">BBA</option>
+                <option value="CS">CS</option>
                 <option value="SE">SE</option>
                 <option value="Psychology">Psychology</option>
                 <option value="EE">EE</option>

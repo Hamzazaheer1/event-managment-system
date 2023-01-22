@@ -27,6 +27,7 @@ const RegisterRequests = () => {
             },
           }
         );
+        console.log(resp.data.data);
         setResponse(resp.data.data);
         setIsLoading(false);
       } catch (err) {
@@ -104,7 +105,7 @@ const RegisterRequests = () => {
                         scope="row"
                         className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                       >
-                        {item.event.title}
+                        {item?.event?.title}
                       </th>
                       <td className="py-4 px-6">
                         <img src={item.proof} className=" w-12 h-12" />
@@ -124,7 +125,7 @@ const RegisterRequests = () => {
                           <FcCancel className="w-10 h-8" />
                         )}
                       </td>
-                      <td className="py-4 px-6">{item.event.feedback}</td>
+                      <td className="py-4 px-6">{item?.event?.feedback}</td>
                     </tr>
                   ))
                 : ""}

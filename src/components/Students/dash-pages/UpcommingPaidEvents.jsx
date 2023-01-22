@@ -28,6 +28,7 @@ const UpcomingPaidEvents = () => {
             },
           }
         );
+        console.log(resp.data);
         setResponse(resp.data);
         setError(null);
       } catch (err) {
@@ -138,7 +139,7 @@ const UpcomingPaidEvents = () => {
             </div>
           ))}
       </div>
-      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />;
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };
