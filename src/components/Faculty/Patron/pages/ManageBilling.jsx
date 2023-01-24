@@ -15,22 +15,23 @@ const ManageBilling = () => {
   const [regNo, setRegno] = useState("");
   const [eventID, setEventId] = useState("");
 
+  const apiHandler = async () => {
+    try {
+      const resp = await axios.get(
+        "http://localhost:3001/api/v1/register/pendingbyPatron",
+        {
+          headers: {
+            authorization: bearer,
+          },
+        }
+      );
+      setResponse(resp.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get(
-          "http://localhost:3001/api/v1/register/pendingbyPatron",
-          {
-            headers: {
-              authorization: bearer,
-            },
-          }
-        );
-        setResponse(resp.data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     apiHandler();
   }, [bearer]);
 
@@ -39,21 +40,40 @@ const ManageBilling = () => {
     setRegno(reg);
   };
 
+  // const handleRegisterApprove = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const resp = await axios.patch(
+  //       `http://localhost:3001/api/v1/register/approve/${eventID}`,
+  //       {
+  //         headers: {
+  //           authorization: bearer,
+  //         },
+  //       }
+  //     );
+  //     console.log(resp);
+  //     toast.success("Register request approved");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err.response.data.message);
+  //   }
+  // };
   const handleRegisterApprove = async (event) => {
     event.preventDefault();
     try {
-      const resp = await axios.patch(
+      const response = await fetch(
         `http://localhost:3001/api/v1/register/approve/${eventID}`,
         {
+          method: "PATCH",
           headers: {
-            authorization: bearer,
+            "Content-Type": "application/json",
+            Authorization: bearer,
           },
         }
       );
-      console.log(resp);
-      toast.success("Register request approved");
+      toast.success("Event Approved Sucessfully..");
+      await apiHandler();
     } catch (err) {
-      console.log(err);
       toast.error(err.response.data.message);
     }
   };
