@@ -45,6 +45,12 @@ const RegisterFaculty = () => {
 
   const signupHandler = async (event) => {
     event.preventDefault();
+    // const v1 = RegUser.test(username);
+    // const v2 = RegPwd.test(password);
+    // if (!v1 || !v2) {
+    //   toast.success("Invalid Entry");
+    //   return;
+    // }
 
     try {
       const resp = await axios.post(

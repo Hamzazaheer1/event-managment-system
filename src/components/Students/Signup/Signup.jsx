@@ -11,7 +11,7 @@ import background from "../../images/background.png";
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 const PWD_REGEX = /^(?=.*[0-9])(?=.{8,})/;
-const NAME_REGEX = /^[a-zA-Z]{3,}$/;
+const NAME_REGEX = /^[a-zA-Z\s]{2,}$/;
 const REG_REGEX = /^[a-zA-Z0-9]+$/;
 
 const Signup = () => {

@@ -14,6 +14,7 @@ const ManageBilling = () => {
   const [photo, setPhoto] = useState("");
   const [regNo, setRegno] = useState("");
   const [eventID, setEventId] = useState("");
+  const [feedback, setFeedback] = useState("");
 
   const apiHandler = async () => {
     try {
@@ -25,6 +26,7 @@ const ManageBilling = () => {
           },
         }
       );
+      console.log(resp.data.data);
       setResponse(resp.data.data);
     } catch (err) {
       console.log(err);
@@ -35,7 +37,7 @@ const ManageBilling = () => {
     apiHandler();
   }, [bearer]);
 
-  const handleClick = (photo, reg) => {
+  const handleApproveToggle = (photo, reg) => {
     setPhoto(photo);
     setRegno(reg);
   };
@@ -84,6 +86,9 @@ const ManageBilling = () => {
       const resp = await axios.patch(
         `http://localhost:3001/api/v1/register/reject/${eventID}`,
         {
+          feedback,
+        },
+        {
           headers: {
             authorization: bearer,
           },
@@ -129,7 +134,7 @@ const ManageBilling = () => {
                       key={index + 1}
                       className="bg-gray-200 border-b hover:bg-gray-50 cursor-pointer"
                       onClick={() => {
-                        handleClick(item.proof, item.student.regno);
+                        handleApproveToggle(item.proof, item.student.regno);
                         setEventId(item._id);
                       }}
                     >
@@ -162,13 +167,15 @@ const ManageBilling = () => {
                         >
                           Approve
                         </button>
-                        <button
+                        {/* <button
                           type="button"
                           className="ml-1 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                          onClick={handleRegisterReject}
+                          // onClick={() => {
+                          //   handleFeedbackClick();
+                          // }}
                         >
                           Reject
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   ))
@@ -176,7 +183,7 @@ const ManageBilling = () => {
             </tbody>
           </table>
         </div>
-        {photo && (
+        {regNo && photo && (
           <div className="overflow-x-auto relative shadow-md sm:rounded-lg p-10 col-span-1">
             <div className="w-full max-w-sm rounded-lg shadow-md bg-gray-800 border-gray-700">
               <img
@@ -187,9 +194,35 @@ const ManageBilling = () => {
               <div className="px-5 pb-5 flex items-center justify-between">
                 <span className="text-3xl font-bold text-white">{regNo}</span>
               </div>
+              <div className="p-5">
+                <label
+                  for="message"
+                  class="block mb-2 text-sm font-medium text-white"
+                >
+                  Rejection Feedback
+                </label>
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500"
+                  placeholder="Write your feedback here..."
+                  onChange={(e) => setFeedback(e.target.value)}
+                ></textarea>
+                <br />
+                <button
+                  type="button"
+                  className="ml-1 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  onClick={handleRegisterReject}
+                >
+                  Reject
+                </button>
+              </div>
             </div>
           </div>
         )}
+        {/* {feedbackToggle && (
+          
+        )} */}
       </div>
       <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>

@@ -49,6 +49,11 @@ const RegisterRequests = () => {
         Your Register In Event Requests
       </h1>
 
+      <p className="font-bold pl-5 text-red-600 underline">
+        Bring the screenshot of this page with you in the event for
+        verification......
+      </p>
+
       {isLoading ? (
         <div role="status" className="flex justify-center pb-10">
           <svg
@@ -115,14 +120,16 @@ const RegisterRequests = () => {
                         {item.isApproved === true ? (
                           <FcApproval className="w-10 h-8 " />
                         ) : (
-                          <FcCancel className="w-10 h-8" />
+                          // <FcCancel className="w-10 h-8" />
+                          ""
                         )}
                       </td>
                       <td className="py-4 px-6">
                         {item.isRejected === true ? (
                           <FcApproval className="w-10 h-8 " />
                         ) : (
-                          <FcCancel className="w-10 h-8" />
+                          // <FcCancel className="w-10 h-8" />
+                          ""
                         )}
                       </td>
                       <td className="py-4 px-6">{item?.event?.feedback}</td>

@@ -379,7 +379,7 @@ const EventsList = () => {
                     <h1 className="bg-red-500 text-white rounded p-2 text-xl">
                       Your Approval Status
                     </h1>
-                    <p className="leading-relaxed text-white text-xl bg-gray-200 text-gray-800 font-semibold p-2 flex">
+                    <p className="leading-relaxed text-white text-xl bg-gray-200 font-semibold p-2 flex">
                       Your Approval Status:
                       <span className="pl-3 text-gray-400">
                         {singleEvent.isPatronApproved === true ? (

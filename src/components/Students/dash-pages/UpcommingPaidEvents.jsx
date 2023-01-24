@@ -69,7 +69,14 @@ const UpcomingPaidEvents = () => {
       console.log(resp);
       toast.success("register request submitted");
     } catch (err) {
-      toast.error(err.response.data.message);
+      let error = err.response.data.message;
+      //console.log(error);
+      let trimmed = error.slice(0, 6);
+      if (trimmed === "E11000") {
+        toast.error("Already Registered....");
+      } else {
+        toast.error(err.response.data.message);
+      }
     }
   };
 
