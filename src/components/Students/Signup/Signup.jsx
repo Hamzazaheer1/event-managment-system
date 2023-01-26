@@ -10,9 +10,10 @@ import background from "../../images/background.png";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-const PWD_REGEX = /^(?=.*[0-9])(?=.{8,})/;
-const NAME_REGEX = /^[a-zA-Z\s]{2,}$/;
-const REG_REGEX = /^[a-zA-Z0-9]+$/;
+const PWD_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
+const NAME_REGEX = /^[a-zA-Z\s]{2,24}$/;
+const REG_REGEX = /^[a-zA-Z0-9]{9}$/;
 
 const Signup = () => {
   const Navigate = useNavigate();
@@ -206,10 +207,11 @@ const Signup = () => {
               }
             >
               <span className="flex gap-2 items-center -mb-4">
-                <FaInfoCircle /> Password should be.
+                <FaInfoCircle /> Password should contains.
               </span>
               <br />
-              At least one number
+              At least one number, one uppercase, one lowercase alphabet and one
+              special character
               <br />
               Minimum 8 characters long
             </p>
@@ -323,6 +325,8 @@ const Signup = () => {
                 <span className="flex gap-2 items-center -mb-4">
                   <FaInfoCircle /> Reg no should oncly contains alphabets &
                   numbers.
+                  <br />
+                  Valid Reg: BXX123456
                 </span>
               </p>
             </div>
@@ -336,6 +340,7 @@ const Signup = () => {
                 className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
                 required
                 onChange={(e) => setPhoto(e.target.files[0])}
+                accept="image/*"
               />
             </div>
             <div className="mb-6">
