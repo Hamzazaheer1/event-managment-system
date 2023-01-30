@@ -172,7 +172,7 @@ const PaidEvents = () => {
                 Supervisor Name
               </th>
               <th scope="col" className="py-3 px-6">
-                Student Name
+                Student RegNo
               </th>
               <th scope="col" className="py-3 px-6">
                 Student Contact No

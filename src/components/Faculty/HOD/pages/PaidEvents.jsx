@@ -20,7 +20,11 @@ const PaidEvents = () => {
 
   function convertDate(dateString) {
     const date = new Date(dateString);
-    return date.toLocaleString();
+
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+
+    return formattedDate;
   }
 
   const apiHandler = async () => {
@@ -246,7 +250,7 @@ const PaidEvents = () => {
                   <p className="leading-relaxed text-white text-xl  ">
                     Date:{" "}
                     <span className="pl-3 text-gray-400">
-                      {convertDate(singleEvent.createdAt)}
+                      {convertDate(singleEvent.startdate)}
                     </span>
                   </p>
                   <p className="leading-relaxed text-white text-xl  ">

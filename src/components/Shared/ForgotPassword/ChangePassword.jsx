@@ -1,20 +1,38 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import custLogo from "../../images/custlogo_white.png";
 import background from "../../images/background.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { FaCheck, FaTimes } from "react-icons/fa";
 import { FaGraduationCap, FaInfoCircle } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+
+const PWD_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
 
 const StudentLogin = () => {
   const Navigate = useNavigate();
   const [response, setResponse] = useState();
   const [error, setError] = useState();
-  const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [password, setPassword] = useState("");
+  const [validPwd, setValidPwd] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+  const [validMatch, setValidMatch] = useState(false);
+  const [matchFocus, setMatchFocus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   let { token } = useParams();
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  useEffect(() => {
+    setValidPwd(PWD_REGEX.test(password));
+    setValidMatch(password === passwordConfirm);
+  }, [password, passwordConfirm]);
+
+  // useEffect(() => {
+  //   setErrMsg("");
+  // }, [password, passwordConfirm]);
 
   const loginHandler = async (event) => {
     event.preventDefault();
@@ -26,15 +44,16 @@ const StudentLogin = () => {
       );
       setResponse(resp);
       setError(null);
-      console.log(response);
-      alert("Passowrd Changed Sucessfully");
+      toast.success("Passowrd Changed Sucessfully");
       setIsLoading(false);
+      await delay(1000);
       Navigate("/");
     } catch (err) {
       setError(err);
       console.log(error);
       setResponse(null);
       setIsLoading(false);
+      toast.error(err);
     }
   };
 
@@ -65,26 +84,76 @@ const StudentLogin = () => {
           </h2>
 
           <div className="mb-5 mt-5">
-            <input
-              type="password"
-              id="password"
-              className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
-              placeholder="password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="flex items-center gap-2">
+              <input
+                type="password"
+                id="password"
+                className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
+                placeholder="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+                aria-invalid={validPwd ? "false" : "true"}
+                aria-describedby="pwdnote"
+                onFocus={() => setPwdFocus(true)}
+                onBlur={() => setPwdFocus(false)}
+              />
+              <FaCheck
+                className={validPwd ? "text-green-500 text-xl" : "hidden"}
+              />
+              <FaTimes
+                className={
+                  validPwd || !password ? "hidden" : "text-red-500 text-xl"
+                }
+              />
+            </div>
+            <p
+              id="pwdnote"
+              className={
+                pwdFocus && !validPwd
+                  ? "text-[0.75rem] bg-black text-white p-2 relative -bottom-[10px] w-max rounded-md"
+                  : "absolute -left-[9999px]"
+              }
+            >
+              <span className="flex gap-2 items-center -mb-4">
+                <FaInfoCircle /> Password should contains.
+              </span>
+              <br />
+              At least one number, one uppercase, one lowercase alphabet and one
+              special character
+              <br />
+              Minimum 8 characters long
+            </p>
           </div>
           <div className="mb-6">
-            <input
-              type="password"
-              id="password"
-              className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
-              placeholder="confirm password"
-              required
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
+            <div className="flex items-center gap-2">
+              <input
+                type="password"
+                id="password"
+                className="bg-gray-50/25 text-white text-sm font-semibold rounded-lg w-full p-2.5 "
+                placeholder="confirm password"
+                required
+                onChange={(e) => setPasswordConfirm(e.target.value)}
+                aria-invalid={validMatch ? "false" : "true"}
+                aria-describedby="confirmnote"
+                onFocus={() => setMatchFocus(true)}
+                onBlur={() => setMatchFocus(false)}
+              />
+              <FaCheck
+                className={
+                  validMatch && passwordConfirm
+                    ? "text-green-500 text-xl"
+                    : "hidden"
+                }
+              />
+              <FaTimes
+                className={
+                  validMatch || !passwordConfirm
+                    ? "hidden"
+                    : "text-red-500 text-xl"
+                }
+              />
+            </div>
           </div>
-
           <button
             type="submit"
             className="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
@@ -116,6 +185,7 @@ const StudentLogin = () => {
           </button>
         </form>
       </div>
+      <ToastContainer autoClose={2000} closeOnClick pauseOnHover />
     </div>
   );
 };

@@ -157,6 +157,15 @@ const ManageEvents = () => {
     }
   };
 
+  function convertDate(dateString) {
+    const date = new Date(dateString);
+
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+
+    return formattedDate;
+  }
+
   return (
     <div className=" bg-gray-100 shadow-lg rounded-lg">
       <h1 className="p-5 text-2xl font-bold">Unverified Events List</h1>
@@ -206,7 +215,7 @@ const ManageEvents = () => {
                     Supervisor Name
                   </th>
                   <th scope="col" className="py-3 px-6">
-                    Student Name
+                    Student RegNo
                   </th>
                   <th scope="col" className="py-3 px-6">
                     Student Contact No
@@ -235,7 +244,9 @@ const ManageEvents = () => {
                       <td className="py-4 px-6">{item.supervisfacname}</td>
                       <td className="py-4 px-6">{item.contctpersonregno}</td>
                       <td className="py-4 px-6">{item.contctpersonmobile}</td>
-                      <td className="py-4 px-6">{item.createdAt}</td>
+                      <td className="py-4 px-6">
+                        {convertDate(item.createdAt)}
+                      </td>
                       <td className="py-4 px-6 flex cursor-pointer hover:scale-110 duration-200">
                         <button
                           type="button"
@@ -300,7 +311,7 @@ const ManageEvents = () => {
                       <p className="leading-relaxed text-white text-xl  ">
                         Date:{" "}
                         <span className="pl-3 text-gray-400">
-                          {singleEvent.createdAt}
+                          {convertDate(singleEvent.startdate)}
                         </span>
                       </p>
                       <p className="leading-relaxed text-white text-xl  ">

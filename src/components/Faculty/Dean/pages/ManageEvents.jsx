@@ -20,10 +20,14 @@ const ManageEvents = () => {
   const [toggle, setToggle] = useState(true);
   const [feedback, setFeedback] = useState("");
 
-  // function convertDate(dateString) {
-  //   const date = new Date(dateString);
-  //   return date.toLocaleString();
-  // }
+  function convertDate(dateString) {
+    const date = new Date(dateString);
+
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+
+    return formattedDate;
+  }
 
   const apiHandler = async () => {
     try {
@@ -206,7 +210,9 @@ const ManageEvents = () => {
                       <td className="py-4 px-6">{item.supervisfacname}</td>
                       <td className="py-4 px-6">{item.contctpersonregno}</td>
                       <td className="py-4 px-6">{item.contctpersonmobile}</td>
-                      <td className="py-4 px-6">{item.createdAt}</td>
+                      <td className="py-4 px-6">
+                        {convertDate(item.createdAt)}
+                      </td>
                       <td className="py-4 px-6">
                         {item.feedback?.map((item) => (
                           <tr>
@@ -282,7 +288,7 @@ const ManageEvents = () => {
                       <p className="leading-relaxed text-white text-xl  ">
                         Date:{" "}
                         <span className="pl-3 text-gray-400">
-                          {singleEvent.createdAt}
+                          {convertDate(singleEvent.startdate)}
                         </span>
                       </p>
                       <p className="leading-relaxed text-white text-xl  ">

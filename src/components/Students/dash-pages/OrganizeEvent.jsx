@@ -220,6 +220,7 @@ const OrganizeEvent = () => {
 
   // console.log("selected society = ", selectedSociety);
   // console.log("selected event = ", selectedEvent);
+  console.log({ date });
 
   useEffect(() => {
     const apiHandler = async () => {
@@ -302,7 +303,7 @@ const OrganizeEvent = () => {
                   Date
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   required
                   placeholder="YYYY-MM-DD"
@@ -422,53 +423,6 @@ const OrganizeEvent = () => {
                   </div>
                 )}
               </div>
-              {/* testing */}
-              {/* testing Event by society*/}
-              {/* <div className="mb-6 relative inline-block text-left">
-                  <div>
-                    <button
-                      onClick={handleSelectEventClick}
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                      id="menu-button"
-                      aria-expanded="true"
-                      aria-haspopup="true"
-                    >
-                      List of Scopes
-                      <AiOutlineCaretDown className="-mr-1 ml-2 h-5 w-5" />
-                    </button>
-                  </div>
-                  {eventSelectToggle && (
-                    <div
-                      className="absolute z-10 mt-2 min-w-full origin-top-right rounded-md bg-gray-300 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="menu-button"
-                      tabindex="-1"
-                    >
-                      <div className="py-1" role="none">
-                        {eventResponse &&
-                          eventResponse.map((item, index) => (
-                            <div
-                              key={index + 1}
-                              className="text-gray-700 block px-4 py-2 text-sm hover:bg-red-500 cursor-pointer"
-                              role="menuitem"
-                              tabindex="-1"
-                              id="menu-item-0"
-                              onClick={() => {
-                                handleEventSelection(item.scope);
-                              }}
-                            >
-                              {item.scope.map((i) => (
-                                <span>{i}</span>
-                              ))}
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  )}
-                </div> */}
-              {/* testing */}
             </div>
             <h1 className="flex justify-center bg-red-500 rounded h-8 text-2xl font-semibold">
               Students Details
