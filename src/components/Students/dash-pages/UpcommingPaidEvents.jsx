@@ -1,6 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { AiOutlineCalendar, AiFillClockCircle } from "react-icons/ai";
+import {
+  AiOutlineCalendar,
+  AiFillClockCircle,
+  AiFillBank,
+} from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -41,7 +45,11 @@ const UpcomingPaidEvents = () => {
 
   function convertDate(dateString) {
     const date = new Date(dateString);
-    return date.toLocaleString();
+
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+
+    return formattedDate;
   }
 
   console.log(response);
@@ -70,7 +78,7 @@ const UpcomingPaidEvents = () => {
       toast.success("register request submitted");
     } catch (err) {
       let error = err.response.data.message;
-      //console.log(error);
+      console.log(err);
       let trimmed = error.slice(0, 6);
       if (trimmed === "E11000") {
         toast.error("Already Registered....");
@@ -133,6 +141,20 @@ const UpcomingPaidEvents = () => {
                   <FaMapMarkerAlt />
                   {item.proposedvenue}
                 </p>
+                <div>
+                  <p className="mb-1  flex items-center gap-1">
+                    <AiFillBank />
+                    {item.bank.bankname}
+                  </p>
+                  <p className="mb-1  flex items-center gap-1">
+                    <AiFillBank />
+                    {item.bank.accnumber}
+                  </p>
+                  <p className="mb-1  flex items-center gap-1">
+                    <AiFillBank />
+                    {item.bank.amount}
+                  </p>
+                </div>
               </div>
               <hr className="border-black mt-4" />
               <p
