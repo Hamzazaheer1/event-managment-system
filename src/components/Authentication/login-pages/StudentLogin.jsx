@@ -8,7 +8,8 @@ import custLogo from "../../images/custlogo_white.png";
 import axios from "axios";
 import background from "../../images/background.png";
 
-const USER_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
+// const USER_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
+const USER_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9}$/;
 const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
 
 const StudentLogin = () => {

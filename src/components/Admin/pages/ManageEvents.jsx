@@ -120,42 +120,22 @@ const ManageEvents = () => {
     }
   };
 
-  // const handleRejectedEvent = async (event) => {
-  //   event.preventDefault();
+  // const handleRejectedEvent = async () => {
   //   try {
-  //     const response = await fetch(
+  //     const resp = await axios.delete(
   //       `http://localhost:3001/api/v1/events/delete/${eventID}`,
   //       {
-  //         method: "DELETE",
   //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: bearer,
+  //           authorization: bearer,
   //         },
   //       }
   //     );
-  //     console.log(response);
+  //     console.log(resp);
   //     toast.success("Event Rejected Sucessfully..");
   //   } catch (err) {
   //     toast.error(err.response.data.message);
   //   }
   // };
-
-  const handleRejectedEvent = async () => {
-    try {
-      const resp = await axios.delete(
-        `http://localhost:3001/api/v1/events/delete/${eventID}`,
-        {
-          headers: {
-            authorization: bearer,
-          },
-        }
-      );
-      console.log(resp);
-      toast.success("Event Rejected Sucessfully..");
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
-  };
 
   function convertDate(dateString) {
     const date = new Date(dateString);
@@ -486,13 +466,13 @@ const ManageEvents = () => {
                   >
                     Approve
                   </button>
-                  <button
+                  {/* <button
                     type="button"
                     className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 "
                     onClick={handleRejectedEvent}
                   >
                     Decline
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

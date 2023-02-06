@@ -142,22 +142,22 @@ const PaidEvents = () => {
   //   }
   // };
 
-  const handleRejectedEvent = async () => {
-    try {
-      const resp = await axios.delete(
-        `http://localhost:3001/api/v1/events/delete/${eventID}`,
-        {
-          headers: {
-            authorization: bearer,
-          },
-        }
-      );
-      console.log(resp);
-      toast.success("Event Rejected Sucessfully..");
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
-  };
+  // const handleRejectedEvent = async () => {
+  //   try {
+  //     const resp = await axios.delete(
+  //       `http://localhost:3001/api/v1/events/delete/${eventID}`,
+  //       {
+  //         headers: {
+  //           authorization: bearer,
+  //         },
+  //       }
+  //     );
+  //     console.log(resp);
+  //     toast.success("Event Rejected Sucessfully..");
+  //   } catch (err) {
+  //     toast.error(err.response.data.message);
+  //   }
+  // };
 
   return (
     <div className=" bg-gray-100 shadow-lg rounded-lg">
@@ -464,13 +464,13 @@ const PaidEvents = () => {
               >
                 Approve
               </button>
-              <button
+              {/* <button
                 type="button"
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 "
                 onClick={handleRejectedEvent}
               >
                 Decline
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

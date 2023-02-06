@@ -19,6 +19,7 @@ const GeneralInfo = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [eventSelector, setEventSelector] = useState(false);
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleClick = () => {
     setEventSelector(!eventSelector);
@@ -62,7 +63,9 @@ const GeneralInfo = () => {
         }
       );
       toast.success("Password Updated Sucessfully...");
-      console.log(resp);
+      await delay(1000);
+      localStorage.removeItem("Student");
+
       Navigate("/std-login");
     } catch (err) {
       console.log(err);

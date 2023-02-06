@@ -8,7 +8,8 @@ import custLogo from "../../images/custlogo_white.png";
 import axios from "axios";
 import background from "../../images/background.png";
 
-const USER_REGEX = /^[A-z]*\.[a-z]*$/;
+// const USER_REGEX = /^[A-z]*\.[a-z]*$/;
+const USER_REGEX = /^[A-Za-z]*\.[A-Za-z]*$/;
 const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/;
 // const PWD_REGEX =
 //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;

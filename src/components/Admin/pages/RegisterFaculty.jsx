@@ -3,7 +3,9 @@ import { ToastContainer, toast } from "react-toastify";
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import axios from "axios";
 
-const RegUser = /^[a-zA-Z.]{3,20}$/;
+// const RegUser = /^[a-zA-Z.]{3,20}$/;
+const RegUser = /^[a-zA-Z]+\.[a-zA-Z0-9]{1,17}$/;
+
 // eslint-disable-next-line
 const RegPwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
@@ -150,12 +152,11 @@ const RegisterFaculty = () => {
             }
           >
             <span className="flex gap-2 items-center -mb-4">
-              <FaInfoCircle /> Only letters (uppercase or lowercase), and dot
-              are allowed.
+              <FaInfoCircle /> Must start with a string and contain dot and the
+              alphanumaric characters.
             </span>
             <br />
-            The username must be at least 3 characters and no more than 20
-            characters long.
+            The username should no more than 23 characters long.
           </p>
         </div>
         <div className="mb-6">

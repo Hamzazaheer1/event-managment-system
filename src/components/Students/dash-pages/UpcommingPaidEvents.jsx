@@ -6,6 +6,8 @@ import {
   AiFillBank,
 } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { BiDialpad } from "react-icons/bi";
+import { BsCashCoin } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 
 const UpcomingPaidEvents = () => {
@@ -147,11 +149,11 @@ const UpcomingPaidEvents = () => {
                     {item.bank.bankname}
                   </p>
                   <p className="mb-1  flex items-center gap-1">
-                    <AiFillBank />
+                    <BiDialpad />
                     {item.bank.accnumber}
                   </p>
                   <p className="mb-1  flex items-center gap-1">
-                    <AiFillBank />
+                    <BsCashCoin />
                     {item.bank.amount}
                   </p>
                 </div>
